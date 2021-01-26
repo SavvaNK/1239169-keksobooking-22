@@ -1,7 +1,7 @@
 # Личный проект «Кексобукинг»
 
 * Студент: [Savva Kirichenko](https://up.htmlacademy.ru/javascript/22/user/1239169).
-* Наставник: `Неизвестно`.
+* Наставник: [Олег Зубов](https://htmlacademy.ru/profile/id42701).
 
 ---
 
