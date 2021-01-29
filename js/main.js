@@ -17,3 +17,8 @@ const getRandomInt = (begin, end) => {
 
   return generateRandomInt(begin, end);
 };
+
+const getRandomFloat = (begin, end, decimal) => {
+  const multiplier = 10 ** decimal;
+  return getRandomInt(begin * multiplier, end * multiplier) / multiplier;
+};
