@@ -22,3 +22,5 @@ const getRandomFloat = (begin, end, decimal) => {
   const multiplier = 10 ** decimal;
   return getRandomInt(begin * multiplier, end * multiplier) / multiplier;
 };
+
+getRandomFloat(1, 2.3,4);
