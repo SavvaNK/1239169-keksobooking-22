@@ -18,9 +18,7 @@ const getRandomInt = (begin, end) => {
   return generateRandomInt(begin, end);
 };
 
-const getRandomFloat = (begin, end, decimal) => {
+const getRandomFloat = (begin, end, decimal) => { // eslint-disable-line
   const multiplier = 10 ** decimal;
   return getRandomInt(begin * multiplier, end * multiplier) / multiplier;
 };
-
-getRandomFloat(1, 2.3,4);
