@@ -24,8 +24,8 @@ const checkErrors = (begin, end) => {
   }
 };
 
-const checkNDigit = (nDigit) => {
-  if (nDigit < 0) {
+const checkNDigits = (nDigits) => {
+  if (nDigits < 0) {
     throw RangeError('Negative values aren\'t allowed! Use 0 and greater for the nDigit.');
   }
 };
@@ -36,9 +36,9 @@ const getRandomInt = (begin, end) => { // eslint-disable-line
   return generateRandomInt(begin, end);
 };
 
-const getRandomFloat = (begin, end, nDigit) => { // eslint-disable-line
+const getRandomFloat = (begin, end, nDigits) => { // eslint-disable-line
   checkErrors(begin, end);
-  checkNDigit(nDigit);
+  checkNDigits(nDigits);
 
-  return generateRandomFloat(begin, end, nDigit);
+  return generateRandomFloat(begin, end, nDigits);
 };
