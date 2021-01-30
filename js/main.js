@@ -26,7 +26,7 @@ const checkErrors = (begin, end) => {
 
 const checkNDigits = (nDigits) => {
   if (nDigits < 0) {
-    throw RangeError('Negative values aren\'t allowed! Use 0 and greater for the nDigit.');
+    throw RangeError('Negative values aren\'t allowed! Use 0 and greater for the nDigits.');
   }
 };
 
