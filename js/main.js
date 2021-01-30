@@ -20,15 +20,15 @@ const checkErrors = (begin, end) => {
   }
 
   if (begin > end) {
-    throw Error ('The Begin value exceeds the End value! The Begin value must be less the End value.');
+    throw Error('The Begin value exceeds the End value! The Begin value must be less the End value.');
   }
-}
+};
 
 const checkNDigit = (nDigit) => {
   if (nDigit < 0) {
     throw RangeError('Negative values aren\'t allowed! Use 0 and greater for the nDigit.');
   }
-}
+};
 
 const getRandomInt = (begin, end) => { // eslint-disable-line
   checkErrors(begin, end);
