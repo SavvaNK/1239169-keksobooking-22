@@ -20,7 +20,7 @@ const generateRandomInt = (min, max) => (
  */
 
 const generateRandomFloat = (min, max, nDigits) => (
-  (Math.random() * (max - min) + min).toPrecision(nDigits + 1)
+  parseFloat((Math.random() * (max - min) + min).toPrecision(nDigits + 1))
 );
 
 const checkErrors = (begin, end) => {
