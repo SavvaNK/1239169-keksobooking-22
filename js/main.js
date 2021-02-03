@@ -133,6 +133,27 @@ const makeCounter = (begin = 1, modificator = 1) => { // eslint-disable-line
 
 const getTitleNumber = makeCounter();
 
+/**
+ * Function to create Array of concatenated string with counter's value inside.
+ *
+ * @param {string} stringStart - first part of concatenated string
+ * @param {string} stringEnd - last part of concatenated string
+ * @param {number} begin - begin number to set in the middle of string
+ * @param {number} end - end number to set in the middle of string
+ * @param {number} modificator - increment or decrement(use '-' to decrement value)
+ * @return {array} to create new instance of counter
+ */
+
+const generateArrayOfStrings = (stringStart, stringEnd, begin, end, modificator = 1) => {
+  const result = [];
+
+  for (let current = begin; current <= end; current += modificator) {
+    result.push(stringStart + current + stringEnd);
+  }
+
+  return result;
+}
+
 // offer's data storage
 
 const typeList = ['palace', 'flat', 'house', 'bungalow'];
@@ -141,7 +162,7 @@ const checkInOutTimes = ['12:00', '13:00', '14:00'];
 
 const featuresList = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner'];
 
-const photosList = ['http://o0.github.io/assets/images/tokyo/hotel1.jpg', 'http://o0.github.io/assets/images/tokyo/hotel2.jpg', 'http://o0.github.io/assets/images/tokyo/hotel3.jpg'];
+const photosList = generateArrayOfStrings('http://o0.github.io/assets/images/tokyo/hotel', '.jpg', 1, 3);
 
 // offer, объект — содержит информацию об объявлении. Состоит из полей:
 const generateOffer = () => ({ // eslint-disable-line
@@ -187,7 +208,6 @@ const generateLocation = () => ({ // eslint-disable-line
   //   y, число с плавающей точкой — долгота, случайное значение от 139.70000 до 139.80000
   y: getRandomFloat(139.70000, 139.80000, 5),
 });
-//
 
 const generateAd = () => ({
   author: generateAuthor(),
