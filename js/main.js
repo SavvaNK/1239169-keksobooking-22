@@ -140,12 +140,12 @@ const featuresList = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'co
 const photosList = ['http://o0.github.io/assets/images/tokyo/hotel1.jpg', 'http://o0.github.io/assets/images/tokyo/hotel2.jpg', 'http://o0.github.io/assets/images/tokyo/hotel3.jpg'];
 
 // offer, объект — содержит информацию об объявлении. Состоит из полей:
-const generateOffer = () => ({
+const generateOffer = () => ({ // eslint-disable-line
   //   title, строка — заголовок предложения. Придумайте самостоятельно.
   title: `Заголовок предложения № ${getTitleNumber()}.`,
 
   //   address, строка — адрес предложения. Для простоты пусть пока составляется из географических координат по маске {{location.x}}, {{location.y}}.
-  // location: `${location['x']}, ${location['y']}`,
+  // offerLocation: `${location['x']}, ${location['y']}`,
 
   //   price, число — стоимость. Любое положительное число.
   price: getRandomFloat(100, 1000),
@@ -186,7 +186,12 @@ const generateLocation = () => ({ // eslint-disable-line
 });
 //
 
-const locA = generateLocation();
-const locB = generateLocation();
-const locC = generateLocation();
-console.log(locA, locB, locC); // eslint-disable-line
+const generateAd = () => ({
+  author: generateAuthor(),
+  offer: generateOffer(),
+  location: generateLocation(),
+});
+
+const ads = new Array(10).fill(null).map(() => generateAd())
+
+console.log(ads); // eslint-disable-line
