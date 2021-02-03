@@ -76,3 +76,28 @@ const getRandomFloat = (begin, end, nDigits= 2) => { // eslint-disable-line
 
   return generateRandomFloat(begin, end, nDigits);
 };
+
+
+/**
+ * Getting a Array of random uniq values of a received array in the specified quantity.
+ *
+ * @param {array} arr - Array to process
+ * @param {number} quantity - number of uniq values to receive
+ * @return {array} Array of random uniq values
+ */
+
+const getUniqRandomItemsFromArray = (arr, quantity) => { // eslint-disable-line
+  let result = [];
+  const getRandomIndexFromArray = (arr) => getRandomInt(0, arr.length - 1);
+
+  while (result.length !== quantity) {
+    const i = getRandomIndexFromArray(arr);
+    const element = arr[i];
+
+    if (!result.includes(element)) {
+      result.push(element);
+    }
+  }
+
+  return result;
+}
