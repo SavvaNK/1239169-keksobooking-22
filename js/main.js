@@ -145,7 +145,7 @@ const generateOffer = () => ({ // eslint-disable-line
   title: `Заголовок предложения № ${getTitleNumber()}.`,
 
   //   address, строка — адрес предложения. Для простоты пусть пока составляется из географических координат по маске {{location.x}}, {{location.y}}.
-  offerLocation: '${offerLocation[\'x\']}, ${offerLocation[\'y\']}',
+  address: '${offerLocation[\'x\']}, ${offerLocation[\'y\']}',
 
   //   price, число — стоимость. Любое положительное число.
   price: getRandomFloat(100, 1000),
@@ -193,4 +193,7 @@ const generateAd = () => ({
 
 const ads = new Array(10).fill(null).map(() => generateAd());
 
-console.log(ads); // eslint-disable-line
+console.log(  // eslint-disable-line
+  JSON.stringify(ads),
+  ads,
+);
