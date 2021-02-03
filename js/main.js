@@ -136,19 +136,19 @@ const getTitleNumber = makeCounter();
 /**
  * Function to create Array of concatenated string with counter's value inside.
  *
- * @param {string} stringStart - first part of concatenated string
- * @param {string} stringEnd - last part of concatenated string
- * @param {number} begin - begin number to set in the middle of string
- * @param {number} end - end number to set in the middle of string
- * @param {number} modificator - increment or decrement(use '-' to decrement value)
- * @return {array} to create new instance of counter
+ * @param {string} stringHead - first part of concatenated string
+ * @param {string} stringTail - last part of concatenated string
+ * @param {number} rangeStart - starting number to set in the middle of string, included
+ * @param {number} rangeEnd - ending number to set in the middle of string, included
+ * @param {number} step - increment or decrement(use '-' to decrement value)
+ * @return {array} Array of strings with enumerated range inside of each
  */
 
-const generateArrayOfStrings = (stringStart, stringEnd, begin, end, modificator = 1) => {
+const generateArrayOfStrings = (stringHead, stringTail, rangeStart, rangeEnd, step = 1) => {
   const result = [];
 
-  for (let current = begin; current <= end; current += modificator) {
-    result.push(stringStart + current + stringEnd);
+  for (let current = rangeStart; step < 0 ? current >= rangeEnd : current <= rangeEnd; current += step) {
+    result.push(stringHead + current + stringTail);
   }
 
   return result;
