@@ -105,3 +105,19 @@ const getUniqRandomItemsFromArray = (arr, quantity) => { // eslint-disable-line
 const generateAuthor = () => ({ // eslint-disable-line
   avatar: `img/avatars/user0${getRandomInt(1, 8)}.png`,
 });
+
+/**
+ * Function to create counter functions using clojure, starting value: 1 and increment it by 1.
+ *
+ * @param {number} begin - starting value
+ * @param {number} modificator - increment or decrement(use '-' to decrement value)
+ * @return {function} to create new instance of counter
+ */
+
+const makeCounter = (begin = 1, modificator = 1) => { // eslint-disable-line
+  let currentCount = begin - modificator;
+  return () => {
+    currentCount = currentCount + modificator;
+    return currentCount;
+  }
+}
