@@ -158,7 +158,7 @@ const generateArrayOfStrings = (stringHead, stringTail, rangeStart, rangeEnd, st
 
 const typeList = ['palace', 'flat', 'house', 'bungalow'];
 
-const checkInOutTimes = ['12:00', '13:00', '14:00'];
+const checkInOutTimes = generateArrayOfStrings('1', ':00', 2, 4);
 
 const featuresList = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner'];
 
