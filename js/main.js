@@ -101,3 +101,7 @@ const getUniqRandomItemsFromArray = (arr, quantity) => { // eslint-disable-line
 
   return result;
 }
+
+const generateAuthor = () => ({ // eslint-disable-line
+  avatar: `img/avatars/user0${getRandomInt(1, 8)}.png`,
+});
