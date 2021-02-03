@@ -102,9 +102,14 @@ const getUniqRandomItemsFromArray = (arr, quantity) => { // eslint-disable-line
   return result;
 }
 
+// author, объект — описывает автора. Содержит одно поле:
+
 const generateAuthor = () => ({ // eslint-disable-line
+  // avatar, строка — адрес изображения вида img/avatars/user{{xx}}.png, где {{xx}} — это случайное число от 1 до 8 с ведущим нулём. Например, 01, 02 и т. д.
   avatar: `img/avatars/user0${getRandomInt(1, 8)}.png`,
 });
+
+// offer's helping functions
 
 /**
  * Function to create counter functions using clojure, starting value: 1 and increment it by 1.
@@ -121,3 +126,57 @@ const makeCounter = (begin = 1, modificator = 1) => { // eslint-disable-line
     return currentCount;
   }
 }
+
+const getTitleNumber = makeCounter();
+
+// offer's data storage
+
+const typeList = ['palace', 'flat', 'house', 'bungalow'];
+
+const checkInOutTimes = ['12:00', '13:00', '14:00'];
+
+const featuresList = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner'];
+
+const photosList = ['http://o0.github.io/assets/images/tokyo/hotel1.jpg', 'http://o0.github.io/assets/images/tokyo/hotel2.jpg', 'http://o0.github.io/assets/images/tokyo/hotel3.jpg'];
+
+// offer, объект — содержит информацию об объявлении. Состоит из полей:
+const generateOffer = () => ({
+  //   title, строка — заголовок предложения. Придумайте самостоятельно.
+  title: `Заголовок предложения № ${getTitleNumber()}.`,
+
+  //   address, строка — адрес предложения. Для простоты пусть пока составляется из географических координат по маске {{location.x}}, {{location.y}}.
+  // location: `${location['x']}, ${location['y']}`,
+
+  //   price, число — стоимость. Любое положительное число.
+  price: getRandomFloat(100, 1000),
+
+  //   type, строка — одно из четырёх фиксированных значений: palace, flat, house или bungalow.
+  type: getUniqRandomItemsFromArray(typeList, 1).toString(),
+
+  //   rooms, число — количество комнат. Любое положительное число.
+  rooms: getRandomInt(1, 10),
+
+  //   guests, число — количество гостей, которое можно разместить. Любое положительное число.
+  guests: getRandomInt(1, 20),
+
+  //   checkin, строка — одно из трёх фиксированных значений: 12:00, 13:00 или 14:00.
+  checkin: getUniqRandomItemsFromArray(checkInOutTimes, 1).toString(),
+
+  //   checkout, строка — одно из трёх фиксированных значений: 12:00, 13:00 или 14:00.
+  checkout: getUniqRandomItemsFromArray(checkInOutTimes, 1).toString(),
+
+  //   features, массив строк — массив случайной длины из значений: wifi, dishwasher, parking, washer, elevator, conditioner. Значения не должны повторяться.
+  features: getUniqRandomItemsFromArray(featuresList, getRandomInt(1, featuresList.length)),
+
+  //   description, строка — описание помещения. Придумайте самостоятельно.
+  description: 'Lorem Ipsum',
+
+  //   photos, массив строк — массив случайной длины из значений: http://o0.github.io/assets/images/tokyo/hotel1.jpg, http://o0.github.io/assets/images/tokyo/hotel2.jpg, http://o0.github.io/assets/images/tokyo/hotel3.jpg.
+  photos: getUniqRandomItemsFromArray(photosList, getRandomInt(1, photosList.length)),
+})
+
+const offerA = generateOffer();
+const offerB = generateOffer();
+const offerC = generateOffer();
+
+console.log(offerA, offerB, offerC); // eslint-disable-line
