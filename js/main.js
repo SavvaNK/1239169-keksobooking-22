@@ -82,11 +82,11 @@ const getRandomFloat = (begin, end, nDigits= 2) => { // eslint-disable-line
  * Getting a Array of random uniq values of a received array in the specified quantity.
  *
  * @param {array} arr - Array to process
- * @param {number} quantity - number of uniq values to receive
- * @return {array} Array of random uniq values
+ * @param {number} quantity - number of uniq values to receive, default value: 1
+ * @return {array|string} Array of random uniq values, but if quantity only one return string
  */
 
-const getUniqRandomItemsFromArray = (arr, quantity) => { // eslint-disable-line
+const getUniqRandomItemsFromArray = (arr, quantity= 1) => { // eslint-disable-line
   let result = [];
   const getRandomIndexFromArray = (arr) => getRandomInt(0, arr.length - 1);
 
@@ -97,6 +97,10 @@ const getUniqRandomItemsFromArray = (arr, quantity) => { // eslint-disable-line
     if (!result.includes(element)) {
       result.push(element);
     }
+  }
+
+  if (quantity === 1) {
+    return result.toString();
   }
 
   return result;
@@ -151,7 +155,7 @@ const generateOffer = () => ({ // eslint-disable-line
   price: getRandomFloat(100, 1000),
 
   //   type, строка — одно из четырёх фиксированных значений: palace, flat, house или bungalow.
-  type: getUniqRandomItemsFromArray(typeList, 1).toString(),
+  type: getUniqRandomItemsFromArray(typeList),
 
   //   rooms, число — количество комнат. Любое положительное число.
   rooms: getRandomInt(1, 10),
@@ -160,10 +164,10 @@ const generateOffer = () => ({ // eslint-disable-line
   guests: getRandomInt(1, 20),
 
   //   checkin, строка — одно из трёх фиксированных значений: 12:00, 13:00 или 14:00.
-  checkin: getUniqRandomItemsFromArray(checkInOutTimes, 1).toString(),
+  checkin: getUniqRandomItemsFromArray(checkInOutTimes),
 
   //   checkout, строка — одно из трёх фиксированных значений: 12:00, 13:00 или 14:00.
-  checkout: getUniqRandomItemsFromArray(checkInOutTimes, 1).toString(),
+  checkout: getUniqRandomItemsFromArray(checkInOutTimes),
 
   //   features, массив строк — массив случайной длины из значений: wifi, dishwasher, parking, washer, elevator, conditioner. Значения не должны повторяться.
   features: getUniqRandomItemsFromArray(featuresList, getRandomInt(1, featuresList.length)),
