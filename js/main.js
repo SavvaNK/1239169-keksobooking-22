@@ -145,7 +145,7 @@ const generateOffer = () => ({ // eslint-disable-line
   title: `Заголовок предложения № ${getTitleNumber()}.`,
 
   //   address, строка — адрес предложения. Для простоты пусть пока составляется из географических координат по маске {{location.x}}, {{location.y}}.
-  // offerLocation: `${location['x']}, ${location['y']}`,
+  offerLocation: '${offerLocation[\'x\']}, ${offerLocation[\'y\']}',
 
   //   price, число — стоимость. Любое положительное число.
   price: getRandomFloat(100, 1000),
@@ -176,7 +176,6 @@ const generateOffer = () => ({ // eslint-disable-line
 })
 
 // location, объект — местоположение в виде географических координат. Состоит из двух полей:
-
 const generateLocation = () => ({ // eslint-disable-line
   //   x, число с плавающей точкой — широта, случайное значение от 35.65000 до 35.70000
   x: getRandomFloat(35.65000, 35.70000, 5),
@@ -192,6 +191,6 @@ const generateAd = () => ({
   location: generateLocation(),
 });
 
-const ads = new Array(10).fill(null).map(() => generateAd())
+const ads = new Array(10).fill(null).map(() => generateAd());
 
 console.log(ads); // eslint-disable-line
