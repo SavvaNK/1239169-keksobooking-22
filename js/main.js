@@ -147,7 +147,11 @@ const getTitleNumber = makeCounter();
 const generateArrayOfStrings = (stringHead, stringTail, rangeStart, rangeEnd, step = 1) => {
   const result = [];
 
-  for (let current = rangeStart; step < 0 ? current >= rangeEnd : current <= rangeEnd; current += step) {
+  for (
+    let current = rangeStart;
+    step < 0 ? current >= rangeEnd : current <= rangeEnd;
+    current += step
+  ) {
     result.push(stringHead + current + stringTail);
   }
 
