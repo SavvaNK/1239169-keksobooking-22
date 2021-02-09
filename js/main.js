@@ -99,11 +99,7 @@ const getUniqRandomItemsFromArray = (arr, quantity= 1) => { // eslint-disable-li
     }
   }
 
-  if (quantity === 1) {
-    return result.toString();
-  }
-
-  return result;
+  return quantity === 1 ? result.toString() : result;
 }
 
 // author, объект — описывает автора. Содержит одно поле:
