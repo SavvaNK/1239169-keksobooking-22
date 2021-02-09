@@ -1,4 +1,4 @@
-import getRandomInt from './utils/get-random-int';
+import getRandomInt from './utils/get-random-int.js';
 
 /**
  * Get a random floating point number in range inclusively from 'min' and 'max', specifying the required number of decimal places with 'nDigits'.

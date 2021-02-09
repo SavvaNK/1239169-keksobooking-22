@@ -1,4 +1,4 @@
-import generateRandomInt from './generate-random-int';
+import generateRandomInt from './generate-random-int.js';
 
 const checkErrors = (begin, end) => {
   if (begin < 0) {
