@@ -1,14 +1,4 @@
-/**
- * Get a random integer in range inclusively from 'min' and 'max'.
- *
- * @param {number} min - min number
- * @param {number} max - max number
- * @return {number} a random integer
- */
-
-const generateRandomInt = (min, max) => (
-  Math.floor(Math.random() * (max - min + 1) + min)
-);
+import getRandomInt from './utils/get-random-int';
 
 /**
  * Get a random floating point number in range inclusively from 'min' and 'max', specifying the required number of decimal places with 'nDigits'.
@@ -45,20 +35,6 @@ const checkNDigits = (nDigits) => {
   if (nDigits < 0) {
     throw new RangeError('Negative values aren\'t allowed! Use 0 and greater for the nDigits.');
   }
-};
-
-/**
- * Get a random positive integer in range inclusively from 'begin' and 'end'.
- *
- * @param {number} begin - begin positive number
- * @param {number} end - end positive number
- * @return {number} a random positive integer
- */
-
-const getRandomInt = (begin, end) => { // eslint-disable-line
-  checkErrors(begin, end);
-
-  return generateRandomInt(begin, end);
 };
 
 /**
