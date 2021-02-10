@@ -26,7 +26,7 @@ const checkErrors = (begin, end) => {
  * @return {number} a random positive integer
  */
 
-const getRandomInt = (begin, end) => { // eslint-disable-line
+const getRandomInt = (begin, end) => {
   checkErrors(begin, end);
 
   return generateRandomInt(begin, end);

@@ -31,7 +31,7 @@ const checkErrors = (begin, end, nDigits) => {
  * @return {number} a random positive floating point number
  */
 
-const getRandomFloat = (begin, end, nDigits= 2) => { // eslint-disable-line
+const getRandomFloat = (begin, end, nDigits= 2) => {
   checkErrors(begin, end, nDigits);
 
   return generateRandomFloat(begin, end, nDigits);
