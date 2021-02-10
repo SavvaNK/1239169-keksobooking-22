@@ -15,42 +15,44 @@ const featuresList = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'co
 
 const photosList = generateArrayOfStrings('http://o0.github.io/assets/images/tokyo/hotel', '.jpg', 1, 3);
 
-const offerLocation = generateLocation();
-
 // offer, объект — содержит информацию об объявлении. Состоит из полей:
-const generateOffer = () => ({
-  //   title, строка — заголовок предложения. Придумайте самостоятельно.
-  title: `Заголовок предложения № ${getTitleNumber()}.`,
 
-  //   address, строка — адрес предложения. Для простоты пусть пока составляется из географических координат по маске {{location.x}}, {{location.y}}.
-  address: `${offerLocation['x']}, ${offerLocation['y']}`,
+const generateOffer = () => {
+  const offerLocation = generateLocation();
 
-  //   price, число — стоимость. Любое положительное число.
-  price: getRandomFloat(100, 1000),
+  return {
+    //   title, строка — заголовок предложения. Придумайте самостоятельно.
+    title: `Заголовок предложения № ${getTitleNumber()}.`,
 
-  //   type, строка — одно из четырёх фиксированных значений: palace, flat, house или bungalow.
-  type: getUniqRandomItemsFromArray(typeList),
+    //   address, строка — адрес предложения. Для простоты пусть пока составляется из географических координат по маске {{location.x}}, {{location.y}}.
+    address: `${offerLocation['x']}, ${offerLocation['y']}`,
 
-  //   rooms, число — количество комнат. Любое положительное число.
-  rooms: getRandomInt(1, 10),
+    //   price, число — стоимость. Любое положительное число.
+    price: getRandomFloat(100, 1000),
 
-  //   guests, число — количество гостей, которое можно разместить. Любое положительное число.
-  guests: getRandomInt(1, 20),
+    //   type, строка — одно из четырёх фиксированных значений: palace, flat, house или bungalow.
+    type: getUniqRandomItemsFromArray(typeList),
 
-  //   checkin, строка — одно из трёх фиксированных значений: 12:00, 13:00 или 14:00.
-  checkin: getUniqRandomItemsFromArray(checkInOutTimes),
+    //   rooms, число — количество комнат. Любое положительное число.
+    rooms: getRandomInt(1, 10),
 
-  //   checkout, строка — одно из трёх фиксированных значений: 12:00, 13:00 или 14:00.
-  checkout: getUniqRandomItemsFromArray(checkInOutTimes),
+    //   guests, число — количество гостей, которое можно разместить. Любое положительное число.
+    guests: getRandomInt(1, 20),
 
-  //   features, массив строк — массив случайной длины из значений: wifi, dishwasher, parking, washer, elevator, conditioner. Значения не должны повторяться.
-  features: getUniqRandomItemsFromArray(featuresList, getRandomInt(1, featuresList.length)),
+    //   checkin, строка — одно из трёх фиксированных значений: 12:00, 13:00 или 14:00.
+    checkin: getUniqRandomItemsFromArray(checkInOutTimes),
 
-  //   description, строка — описание помещения. Придумайте самостоятельно.
-  description: 'Lorem Ipsum',
+    //   checkout, строка — одно из трёх фиксированных значений: 12:00, 13:00 или 14:00.
+    checkout: getUniqRandomItemsFromArray(checkInOutTimes),
 
-  //   photos, массив строк — массив случайной длины из значений: http://o0.github.io/assets/images/tokyo/hotel1.jpg, http://o0.github.io/assets/images/tokyo/hotel2.jpg, http://o0.github.io/assets/images/tokyo/hotel3.jpg.
-  photos: getUniqRandomItemsFromArray(photosList, getRandomInt(1, photosList.length)),
-});
+    //   features, массив строк — массив случайной длины из значений: wifi, dishwasher, parking, washer, elevator, conditioner. Значения не должны повторяться.
+    features: getUniqRandomItemsFromArray(featuresList, getRandomInt(1, featuresList.length)),
+
+    //   description, строка — описание помещения. Придумайте самостоятельно.
+    description: 'Lorem Ipsum',
+
+    //   photos, массив строк — массив случайной длины из значений: http://o0.github.io/assets/images/tokyo/hotel1.jpg, http://o0.github.io/assets/images/tokyo/hotel2.jpg, http://o0.github.io/assets/images/tokyo/hotel3.jpg.
+    photos: getUniqRandomItemsFromArray(photosList, getRandomInt(1, photosList.length)),
+}};
 
 export default generateOffer;
