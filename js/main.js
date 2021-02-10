@@ -1,4 +1,4 @@
-import generateAd from './src/generate-ad.js';
+import generateAd from './data/generate-ad.js';
 
 const ads = new Array(10).fill(null).map(generateAd);
 
