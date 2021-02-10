@@ -1,6 +1,7 @@
 import getRandomInt from './utils/get-random-int.js';
 import getRandomFloat from './utils/get-random-float.js';
 import getUniqRandomItemsFromArray from './utils/get-uniq-random-items-from-array.js';
+import makeCounter from './utils/make-counter.js';
 
 // author, объект — описывает автора. Содержит одно поле:
 
@@ -10,22 +11,6 @@ const generateAuthor = () => ({ // eslint-disable-line
 });
 
 // offer's helping functions
-
-/**
- * Function to create counter functions using clojure, starting value: 1 and increment it by 1.
- *
- * @param {number} begin - starting value
- * @param {number} modificator - increment or decrement(use '-' to decrement value)
- * @return {function} to create new instance of counter
- */
-
-const makeCounter = (begin = 1, modificator = 1) => { // eslint-disable-line
-  let currentCount = begin - modificator;
-  return () => {
-    currentCount = currentCount + modificator;
-    return currentCount;
-  }
-}
 
 const getTitleNumber = makeCounter();
 
