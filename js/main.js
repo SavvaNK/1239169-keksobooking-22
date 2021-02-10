@@ -1,29 +1,6 @@
 import getRandomInt from './utils/get-random-int.js';
 import getRandomFloat from './utils/get-random-float.js';
-
-/**
- * Getting a Array of random uniq values of a received array in the specified quantity.
- *
- * @param {array} arr - Array to process
- * @param {number} quantity - number of uniq values to receive, default value: 1
- * @return {array|string} Array of random uniq values, but if quantity only one return string
- */
-
-const getUniqRandomItemsFromArray = (arr, quantity= 1) => { // eslint-disable-line
-  let result = [];
-  const getRandomIndexFromArray = (arr) => getRandomInt(0, arr.length - 1);
-
-  while (result.length !== quantity) {
-    const i = getRandomIndexFromArray(arr);
-    const element = arr[i];
-
-    if (!result.includes(element)) {
-      result.push(element);
-    }
-  }
-
-  return quantity === 1 ? result.toString() : result;
-}
+import getUniqRandomItemsFromArray from './utils/get-uniq-random-items-from-array.js';
 
 // author, объект — описывает автора. Содержит одно поле:
 
