@@ -2,13 +2,7 @@ import getRandomInt from './utils/get-random-int.js';
 import getRandomFloat from './utils/get-random-float.js';
 import getUniqRandomItemsFromArray from './utils/get-uniq-random-items-from-array.js';
 import makeCounter from './utils/make-counter.js';
-
-// author, объект — описывает автора. Содержит одно поле:
-
-const generateAuthor = () => ({ // eslint-disable-line
-  // avatar, строка — адрес изображения вида img/avatars/user{{xx}}.png, где {{xx}} — это случайное число от 1 до 8 с ведущим нулём. Например, 01, 02 и т. д.
-  avatar: `img/avatars/user0${getRandomInt(1, 8)}.png`,
-});
+import generateAuthor from './src/generate-author.js';
 
 // offer's helping functions
 
