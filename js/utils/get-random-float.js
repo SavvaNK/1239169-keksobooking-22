@@ -1,6 +1,6 @@
 import generateRandomFloat from './generate-random-float.js';
 
-const checkErrors = (begin, end) => {
+const checkErrors = (begin, end, nDigits) => {
   if (begin < 0) {
     throw new RangeError('Negative values aren\'t allowed! Use 0 and greater for the Begin.');
   }
@@ -16,9 +16,7 @@ const checkErrors = (begin, end) => {
   if (begin > end) {
     throw new RangeError('The Begin value exceeds the End value! The Begin value must be less the End value.');
   }
-};
 
-const checkNDigits = (nDigits) => {
   if (nDigits < 0) {
     throw new RangeError('Negative values aren\'t allowed! Use 0 and greater for the nDigits.');
   }
@@ -34,8 +32,7 @@ const checkNDigits = (nDigits) => {
  */
 
 const getRandomFloat = (begin, end, nDigits= 2) => { // eslint-disable-line
-  checkErrors(begin, end);
-  checkNDigits(nDigits);
+  checkErrors(begin, end, nDigits);
 
   return generateRandomFloat(begin, end, nDigits);
 };
