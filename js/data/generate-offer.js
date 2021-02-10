@@ -3,6 +3,7 @@ import generateArrayOfStrings from '../utils/generate-array-of-strings.js';
 import getRandomFloat from '../utils/get-random-float.js';
 import getUniqRandomItemsFromArray from '../utils/get-uniq-random-items-from-array.js';
 import getRandomInt from '../utils/get-random-int.js';
+import generateLocation from './generate-location.js';
 
 const getTitleNumber = makeCounter();
 
@@ -14,13 +15,15 @@ const featuresList = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'co
 
 const photosList = generateArrayOfStrings('http://o0.github.io/assets/images/tokyo/hotel', '.jpg', 1, 3);
 
+const offerLocation = generateLocation();
+
 // offer, объект — содержит информацию об объявлении. Состоит из полей:
 const generateOffer = () => ({
   //   title, строка — заголовок предложения. Придумайте самостоятельно.
   title: `Заголовок предложения № ${getTitleNumber()}.`,
 
   //   address, строка — адрес предложения. Для простоты пусть пока составляется из географических координат по маске {{location.x}}, {{location.y}}.
-  address: '${offerLocation[\'x\']}, ${offerLocation[\'y\']}',
+  address: `${offerLocation['x']}, ${offerLocation['y']}`,
 
   //   price, число — стоимость. Любое положительное число.
   price: getRandomFloat(100, 1000),
