@@ -1,4 +1,4 @@
-import getRandomInt from '../utils/get-random-int.js';
+import { getRandomInt } from '../utils/index.js';
 
 // author, объект — описывает автора. Содержит одно поле:
 const generateAuthor = () => ({
@@ -6,4 +6,4 @@ const generateAuthor = () => ({
   avatar: `img/avatars/user0${getRandomInt(1, 8)}.png`,
 });
 
-export default generateAuthor;
+export { generateAuthor };

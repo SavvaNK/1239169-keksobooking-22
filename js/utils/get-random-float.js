@@ -1,4 +1,4 @@
-import generateRandomFloat from './generate-random-float.js';
+import { generateRandomFloat } from './generate-random-float.js';
 
 const checkErrors = (begin, end, nDigits) => {
   if (begin < 0) {
@@ -37,4 +37,4 @@ const getRandomFloat = (begin, end, nDigits= 2) => {
   return generateRandomFloat(begin, end, nDigits);
 };
 
-export default getRandomFloat;
+export { getRandomFloat };

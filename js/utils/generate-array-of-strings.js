@@ -23,4 +23,4 @@ const generateArrayOfStrings = (stringHead, stringTail, rangeStart, rangeEnd, st
   return result;
 };
 
-export default generateArrayOfStrings;
+export { generateArrayOfStrings };

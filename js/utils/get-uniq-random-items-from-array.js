@@ -1,4 +1,4 @@
-import getRandomInt from './get-random-int.js';
+import { getRandomInt } from './get-random-int.js';
 
 const checkErrors = (arr, quantity) => {
   if (!Array.isArray(arr)) {
@@ -44,4 +44,4 @@ const getUniqRandomItemsFromArray = (arr, quantity= 1) => {
   return quantity === 1 ? result.toString() : result;
 };
 
-export default getUniqRandomItemsFromArray;
+export { getUniqRandomItemsFromArray };

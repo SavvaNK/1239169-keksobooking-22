@@ -15,4 +15,4 @@ const makeCounter = (begin = 1, step = 1) => {
   }
 };
 
-export default makeCounter;
+export { makeCounter };

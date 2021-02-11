@@ -1,9 +1,5 @@
-import makeCounter from '../utils/make-counter.js';
-import generateArrayOfStrings from '../utils/generate-array-of-strings.js';
-import getRandomFloat from '../utils/get-random-float.js';
-import getUniqRandomItemsFromArray from '../utils/get-uniq-random-items-from-array.js';
-import getRandomInt from '../utils/get-random-int.js';
-import generateLocation from './generate-location.js';
+import { makeCounter,  generateArrayOfStrings, getRandomFloat, getUniqRandomItemsFromArray, getRandomInt } from '../utils/index.js';
+import { generateLocation } from './generate-location.js';
 
 const getTitleNumber = makeCounter();
 
@@ -56,4 +52,4 @@ const generateOffer = () => {
   }
 };
 
-export default generateOffer;
+export { generateOffer };

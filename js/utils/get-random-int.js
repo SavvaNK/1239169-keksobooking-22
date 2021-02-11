@@ -1,4 +1,4 @@
-import generateRandomInt from './generate-random-int.js';
+import { generateRandomInt } from './generate-random-int.js';
 
 const checkErrors = (begin, end) => {
   if (begin < 0) {
@@ -32,4 +32,4 @@ const getRandomInt = (begin, end) => {
   return generateRandomInt(begin, end);
 };
 
-export default getRandomInt;
+export { getRandomInt };

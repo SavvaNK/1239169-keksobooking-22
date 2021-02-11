@@ -1,4 +1,4 @@
-import getRandomFloat from '../utils/get-random-float.js';
+import { getRandomFloat } from '../utils/index.js';
 
 // location, объект — местоположение в виде географических координат. Состоит из двух полей:
 const generateLocation = () => ({
@@ -9,4 +9,4 @@ const generateLocation = () => ({
   y: getRandomFloat(139.70000, 139.80000, 5),
 });
 
-export default generateLocation;
+export { generateLocation };

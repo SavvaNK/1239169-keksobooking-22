@@ -11,4 +11,4 @@ const generateRandomFloat = (min, max, nDigits) => (
   parseFloat((Math.random() * (max - min) + min).toFixed(nDigits))
 );
 
-export default generateRandomFloat;
+export { generateRandomFloat };
