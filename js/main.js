@@ -20,6 +20,8 @@ const typeDict = {
   'bungalow': 'Бунгало',
 }
 
+const assingArray = (value) => Array.isArray(value) ? value : Array(value);
+
 ads.forEach(({author, offer}) => {
   const popupClone = popupTemplate.cloneNode(true);
 
@@ -30,25 +32,41 @@ ads.forEach(({author, offer}) => {
   popupClone.querySelector('.popup__type').textContent = typeDict[offer.type];
   popupClone.querySelector('.popup__text--capacity').textContent = `${offer.rooms} комнаты для ${offer.guests} гостей`;
   popupClone.querySelector('.popup__text--time').textContent = `Заезд после ${offer.checkin}, выезд до ${offer.checkout}`;
-  if(!offer.features.includes('wifi')) {
+
+  const offerFeature = assingArray(offer.features);
+  if(!offerFeature.includes('wifi')) {
     popupClone.querySelector('.popup__feature--wifi').style.display = 'none';
   }
-  if(!offer.features.includes('dishwasher')) {
+  if(!offerFeature.includes('dishwasher')) {
     popupClone.querySelector('.popup__feature--dishwasher').style.display = 'none';
   }
-  if(!offer.features.includes('parking')) {
+  if(!offerFeature.includes('parking')) {
     popupClone.querySelector('.popup__feature--parking').style.display = 'none';
   }
-  if(!offer.features.includes('washer')) {
+  if(!offerFeature.includes('washer')) {
     popupClone.querySelector('.popup__feature--washer').style.display = 'none';
   }
-  if(!offer.features.includes('elevator')) {
+  if(!offerFeature.includes('elevator')) {
     popupClone.querySelector('.popup__feature--elevator').style.display = 'none';
   }
-  if(!offer.features.includes('conditioner')) {
+  if(!offerFeature.includes('conditioner')) {
     popupClone.querySelector('.popup__feature--conditioner').style.display = 'none';
   }
+  popupClone.querySelector('.popup__description').textContent = offer.description;
+
+  const popupPhotos = popupClone.querySelector('.popup__photos');
+  const popupPhotoEmpty = popupPhotos.querySelector('.popup__photo');
+  const offerPhotos = assingArray(offer.photos);
+
+  offerPhotos.forEach((photo) => {
+    const popupPhotoClone = popupPhotoEmpty.cloneNode();
+    popupPhotoClone.setAttribute('src', photo);
+    popupPhotos.appendChild(popupPhotoClone);
+  });
+
+  popupPhotoEmpty.remove();
 
   mapCanvas.appendChild(popupClone);
 });
+
 
