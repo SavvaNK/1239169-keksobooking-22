@@ -20,32 +20,32 @@ const typeDict = {
   'bungalow': 'Бунгало',
 }
 
-ads.forEach((ad) => {
+ads.forEach(({author, offer}) => {
   const popupClone = popupTemplate.cloneNode(true);
 
-  popupClone.querySelector('.popup__avatar').setAttribute('src', ad.author.avatar);
-  popupClone.querySelector('.popup__title').textContent = ad.offer.title;
-  popupClone.querySelector('.popup__text--address').textContent = ad.offer.address;
-  popupClone.querySelector('.popup__text--price').textContent = `${ad.offer.price} ₽/ночь`;
-  popupClone.querySelector('.popup__type').textContent = typeDict[ad.offer.type];
-  popupClone.querySelector('.popup__text--capacity').textContent = `${ad.offer.rooms} комнаты для ${ad.offer.guests} гостей`;
-  popupClone.querySelector('.popup__text--time').textContent = `Заезд после ${ad.offer.checkin}, выезд до ${ad.offer.checkout}`;
-  if(!ad.offer.features.includes('wifi')) {
+  popupClone.querySelector('.popup__avatar').setAttribute('src', author.avatar);
+  popupClone.querySelector('.popup__title').textContent = offer.title;
+  popupClone.querySelector('.popup__text--address').textContent = offer.address;
+  popupClone.querySelector('.popup__text--price').innerHTML = `${offer.price} <span>₽/ночь<span>`;
+  popupClone.querySelector('.popup__type').textContent = typeDict[offer.type];
+  popupClone.querySelector('.popup__text--capacity').textContent = `${offer.rooms} комнаты для ${offer.guests} гостей`;
+  popupClone.querySelector('.popup__text--time').textContent = `Заезд после ${offer.checkin}, выезд до ${offer.checkout}`;
+  if(!offer.features.includes('wifi')) {
     popupClone.querySelector('.popup__feature--wifi').style.display = 'none';
   }
-  if(!ad.offer.features.includes('dishwasher')) {
+  if(!offer.features.includes('dishwasher')) {
     popupClone.querySelector('.popup__feature--dishwasher').style.display = 'none';
   }
-  if(!ad.offer.features.includes('parking')) {
+  if(!offer.features.includes('parking')) {
     popupClone.querySelector('.popup__feature--parking').style.display = 'none';
   }
-  if(!ad.offer.features.includes('washer')) {
+  if(!offer.features.includes('washer')) {
     popupClone.querySelector('.popup__feature--washer').style.display = 'none';
   }
-  if(!ad.offer.features.includes('elevator')) {
+  if(!offer.features.includes('elevator')) {
     popupClone.querySelector('.popup__feature--elevator').style.display = 'none';
   }
-  if(!ad.offer.features.includes('conditioner')) {
+  if(!offer.features.includes('conditioner')) {
     popupClone.querySelector('.popup__feature--conditioner').style.display = 'none';
   }
 
