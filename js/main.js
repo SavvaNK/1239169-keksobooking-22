@@ -13,12 +13,14 @@ const popupTemplate = document.querySelector('#card')
 
 const mapCanvas = document.querySelector('#map-canvas');
 
+const fragment = document.createDocumentFragment();
+
 const typeDict = {
   'palace': 'Дворец',
   'flat': 'Квартира',
   'house': 'Дом',
   'bungalow': 'Бунгало',
-}
+};
 
 const assingArray = (value) => Array.isArray(value) ? value : Array(value);
 
@@ -66,7 +68,7 @@ ads.forEach(({author, offer}) => {
 
   popupPhotoEmpty.remove();
 
-  mapCanvas.appendChild(popupClone);
+  fragment.appendChild(popupClone);
 });
 
-
+mapCanvas.appendChild(fragment.firstChild);
