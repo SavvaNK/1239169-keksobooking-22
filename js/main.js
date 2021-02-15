@@ -22,8 +22,6 @@ const typeDict = {
   'bungalow': 'Бунгало',
 };
 
-const assingArray = (value) => Array.isArray(value) ? value : Array(value);
-
 ads.forEach(({author, offer}) => {
   const popupClone = popupTemplate.cloneNode(true);
 
@@ -35,7 +33,7 @@ ads.forEach(({author, offer}) => {
   popupClone.querySelector('.popup__text--capacity').textContent = `${offer.rooms} комнаты для ${offer.guests} гостей`;
   popupClone.querySelector('.popup__text--time').textContent = `Заезд после ${offer.checkin}, выезд до ${offer.checkout}`;
 
-  const offerFeature = assingArray(offer.features);
+  const offerFeature = offer.features;
   if(!offerFeature.includes('wifi')) {
     popupClone.querySelector('.popup__feature--wifi').style.display = 'none';
   }
@@ -58,7 +56,7 @@ ads.forEach(({author, offer}) => {
 
   const popupPhotos = popupClone.querySelector('.popup__photos');
   const popupPhotoEmpty = popupPhotos.querySelector('.popup__photo');
-  const offerPhotos = assingArray(offer.photos);
+  const offerPhotos = offer.photos;
 
   offerPhotos.forEach((photo) => {
     const popupPhotoClone = popupPhotoEmpty.cloneNode();
