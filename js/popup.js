@@ -61,7 +61,7 @@ ads.forEach(({author, offer}) => {
   const offerFeature = offer.features;
   features.forEach((feature) => {
     if(!offerFeature.includes(feature)) {
-      popupClone.querySelector(`.popup__feature--${feature}`).style.display = 'none';
+      popupClone.querySelector(`.popup__feature--${feature}`).remove();
     }
   });
 
