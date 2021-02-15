@@ -1,6 +1,8 @@
 import { makeCounter,  generateArrayOfStrings, getRandomFloat, getUniqRandomItemsFromArray, getRandomInt } from '../utils/index.js';
 import { generateLocation } from './generate-location.js';
 
+const assignArray = (value) => Array.isArray(value) ? value : Array(value);
+
 const getTitleNumber = makeCounter();
 
 const typeList = ['palace', 'flat', 'house', 'bungalow'];
@@ -42,13 +44,13 @@ const generateOffer = () => {
     checkout: getUniqRandomItemsFromArray(checkInOutTimes),
 
     //   features, массив строк — массив случайной длины из значений: wifi, dishwasher, parking, washer, elevator, conditioner. Значения не должны повторяться.
-    features: getUniqRandomItemsFromArray(featuresList, getRandomInt(1, featuresList.length)),
+    features: assignArray(getUniqRandomItemsFromArray(featuresList, getRandomInt(1, featuresList.length))),
 
     //   description, строка — описание помещения. Придумайте самостоятельно.
     description: 'Lorem Ipsum',
 
     //   photos, массив строк — массив случайной длины из значений: http://o0.github.io/assets/images/tokyo/hotel1.jpg, http://o0.github.io/assets/images/tokyo/hotel2.jpg, http://o0.github.io/assets/images/tokyo/hotel3.jpg.
-    photos: getUniqRandomItemsFromArray(photosList, getRandomInt(1, photosList.length)),
+    photos: assignArray(getUniqRandomItemsFromArray(photosList, getRandomInt(1, photosList.length))),
   }
 };
 
