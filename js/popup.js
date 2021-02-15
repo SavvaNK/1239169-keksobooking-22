@@ -22,6 +22,8 @@ const typeDict = {
   'bungalow': 'Бунгало',
 };
 
+const features = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner'];
+
 const getDeclensionRooms = (roomNumber) => {
   roomNumber = roomNumber.toString();
   let result = 'комнат';
@@ -57,24 +59,12 @@ ads.forEach(({author, offer}) => {
   popupClone.querySelector('.popup__text--time').textContent = `Заезд после ${offer.checkin}, выезд до ${offer.checkout}`;
 
   const offerFeature = offer.features;
-  if(!offerFeature.includes('wifi')) {
-    popupClone.querySelector('.popup__feature--wifi').style.display = 'none';
-  }
-  if(!offerFeature.includes('dishwasher')) {
-    popupClone.querySelector('.popup__feature--dishwasher').style.display = 'none';
-  }
-  if(!offerFeature.includes('parking')) {
-    popupClone.querySelector('.popup__feature--parking').style.display = 'none';
-  }
-  if(!offerFeature.includes('washer')) {
-    popupClone.querySelector('.popup__feature--washer').style.display = 'none';
-  }
-  if(!offerFeature.includes('elevator')) {
-    popupClone.querySelector('.popup__feature--elevator').style.display = 'none';
-  }
-  if(!offerFeature.includes('conditioner')) {
-    popupClone.querySelector('.popup__feature--conditioner').style.display = 'none';
-  }
+  features.forEach((feature) => {
+    if(!offerFeature.includes(feature)) {
+      popupClone.querySelector(`.popup__feature--${feature}`).style.display = 'none';
+    }
+  })
+
   popupClone.querySelector('.popup__description').textContent = offer.description;
 
   const popupPhotos = popupClone.querySelector('.popup__photos');
