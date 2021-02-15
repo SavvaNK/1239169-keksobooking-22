@@ -22,6 +22,24 @@ const typeDict = {
   'bungalow': 'Бунгало',
 };
 
+const getDeclensionRoom = (roomNumbers) => {
+  roomNumbers = roomNumbers.toString();
+  let result = 'комнат';
+
+  if (RegExp('[2-4]$').test(roomNumbers)) {
+    result = 'комнаты';
+  }
+  if (RegExp('1$').test(roomNumbers)) {
+    result = 'комната';
+  }
+
+  if (RegExp('11$').test(roomNumbers)) {
+    result = 'комнат';
+  }
+
+  return result;
+}
+
 ads.forEach(({author, offer}) => {
   const popupClone = popupTemplate.cloneNode(true);
 
@@ -30,7 +48,8 @@ ads.forEach(({author, offer}) => {
   popupClone.querySelector('.popup__text--address').textContent = offer.address;
   popupClone.querySelector('.popup__text--price').innerHTML = `${offer.price} <span>₽/ночь<span>`;
   popupClone.querySelector('.popup__type').textContent = typeDict[offer.type];
-  popupClone.querySelector('.popup__text--capacity').textContent = `${offer.rooms} комнаты для ${offer.guests} гостей`;
+  const offerRooms = offer.rooms;
+  popupClone.querySelector('.popup__text--capacity').textContent = `${offerRooms} ${getDeclensionRoom(offerRooms)} для ${offer.guests} гостей`;
   popupClone.querySelector('.popup__text--time').textContent = `Заезд после ${offer.checkin}, выезд до ${offer.checkout}`;
 
   const offerFeature = offer.features;
