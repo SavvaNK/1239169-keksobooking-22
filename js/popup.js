@@ -63,7 +63,7 @@ ads.forEach(({author, offer}) => {
     if(!offerFeature.includes(feature)) {
       popupClone.querySelector(`.popup__feature--${feature}`).style.display = 'none';
     }
-  })
+  });
 
   popupClone.querySelector('.popup__description').textContent = offer.description;
 
