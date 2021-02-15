@@ -1,5 +1,5 @@
 /**
- * Function to create counter functions using clojure, starting value: 1 and increment it by 1.
+ * Function to create counter functions using closure, starting value: 1 and increment it by 1.
  *
  * @param {number} begin - starting value
  * @param {number} step - increment or decrement(use '-' to decrement value)

@@ -22,23 +22,25 @@ const typeDict = {
   'bungalow': 'Бунгало',
 };
 
-const getDeclensionRoom = (roomNumbers) => {
-  roomNumbers = roomNumbers.toString();
+const getDeclensionRooms = (roomNumber) => {
+  roomNumber = roomNumber.toString();
   let result = 'комнат';
 
-  if (RegExp('[2-4]$').test(roomNumbers)) {
+  if (RegExp('[2-4]$').test(roomNumber)) {
     result = 'комнаты';
   }
-  if (RegExp('1$').test(roomNumbers)) {
+  if (RegExp('1$').test(roomNumber)) {
     result = 'комната';
   }
 
-  if (RegExp('11$').test(roomNumbers)) {
+  if (RegExp('11$').test(roomNumber)) {
     result = 'комнат';
   }
 
   return result;
-}
+};
+
+const getDeclensionGuests = (guestsNumber) => guestsNumber === 1 ? 'гостя' : 'гостей';
 
 ads.forEach(({author, offer}) => {
   const popupClone = popupTemplate.cloneNode(true);
@@ -48,8 +50,10 @@ ads.forEach(({author, offer}) => {
   popupClone.querySelector('.popup__text--address').textContent = offer.address;
   popupClone.querySelector('.popup__text--price').innerHTML = `${offer.price} <span>₽/ночь<span>`;
   popupClone.querySelector('.popup__type').textContent = typeDict[offer.type];
+
   const offerRooms = offer.rooms;
-  popupClone.querySelector('.popup__text--capacity').textContent = `${offerRooms} ${getDeclensionRoom(offerRooms)} для ${offer.guests} гостей`;
+  const offerGuests = offer.guests;
+  popupClone.querySelector('.popup__text--capacity').textContent = `${offerRooms} ${getDeclensionRooms(offerRooms)} для ${offerGuests} ${getDeclensionGuests(offerGuests)}`;
   popupClone.querySelector('.popup__text--time').textContent = `Заезд после ${offer.checkin}, выезд до ${offer.checkout}`;
 
   const offerFeature = offer.features;
