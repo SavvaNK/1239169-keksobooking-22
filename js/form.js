@@ -15,3 +15,17 @@ const setMinPrice = () => {
 };
 
 inputType.addEventListener('change', setMinPrice);
+
+const inputTimeIn = document.querySelector('#timein');
+const inputTimeOut = document.querySelector('#timeout');
+
+const syncTimeIn = () => {
+  inputTimeIn.value = inputTimeOut.value;
+};
+
+const syncTimeOut = () => {
+  inputTimeOut.value = inputTimeIn.value;
+};
+
+inputTimeIn.addEventListener('change', syncTimeOut);
+inputTimeOut.addEventListener('change', syncTimeIn);
