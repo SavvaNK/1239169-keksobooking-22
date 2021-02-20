@@ -1,11 +1,6 @@
 import './popup.js'
 import './form.js'
 
-const tokioCenter = {
-  lat: 35.67500,
-  lng: 139.75000,
-};
-
 const disableElement = (el) => el.disabled = true;
 const enableElement = (el) => el.disabled = false;
 const mapChildren = (parent, selector, fn) => parent.querySelectorAll(selector).forEach(fn);
@@ -27,6 +22,11 @@ const enableForm = (formSelector, ...selectors) => {
 disableForm('.ad-form', 'fieldset');
 disableForm('.map__filters', 'fieldset', 'select');
 
+const tokioCenter = {
+  lat: 35.67500,
+  lng: 139.75000,
+};
+
 const map = L.map('map-canvas')
   .on('load', () => {
     enableForm('.ad-form', 'fieldset');
@@ -44,3 +44,27 @@ L.tileLayer(
   },
 ).addTo(map);
 
+const mainIcon = L.icon({
+  iconUrl: '../img/main-pin.svg',
+  iconSize: [60, 80],
+  iconAnchor: [30, 80],
+});
+
+const mainMarker = L.marker(
+  {
+    lat: tokioCenter.lat,
+    lng: tokioCenter.lng,
+  },
+  {
+    draggable: true,
+    icon: mainIcon,
+  },
+).addTo(map);
+
+const address = document.querySelector('#address');
+address.readOnly = true;
+address.value = `${tokioCenter.lat}, ${tokioCenter.lng}`;
+
+mainMarker.on('moveend', (evt) => {
+  address.value = `${evt.target.getLatLng().lat.toFixed(5)}, ${evt.target.getLatLng().lng.toFixed(5)}`;
+});
