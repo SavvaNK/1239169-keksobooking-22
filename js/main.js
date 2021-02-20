@@ -6,25 +6,26 @@ const tokioCenter = {
   y: 139.75000,
 };
 
-const makeElementDisabled = (el) => el.disabled = true;
+const makeFormInactive = (formClassName) => {
+  const form = document.querySelector(`.${formClassName}`);
+  form.classList.add(`.${formClassName}--disabled`);
 
-const adForm = document.querySelector('.ad-form');
+  for (let child of form) {
+    child = child.disabled = true;
+  }
+};
 
-adForm.classList.add('.ad-form--disabled');
+const makeFormActive = (formClassName) => {
+  const form = document.querySelector(`.${formClassName}`);
+  form.classList.remove(`.${formClassName}--disabled`);
 
-const adFormFieldsets = adForm.querySelectorAll('fieldset');
+  for (let child of form) {
+    child = child.disabled = false;
+  }
+};
 
-adFormFieldsets.forEach(makeElementDisabled);
+makeFormInactive('ad-form');
+makeFormInactive('map__filters');
 
-
-const mapFilters = document.querySelector('.map__filters');
-
-mapFilters.classList.add('.map__filters--disabled');
-
-const mapFiltersFieldsets = mapFilters.querySelectorAll('fieldset');
-
-mapFiltersFieldsets.forEach(makeElementDisabled);
-
-const mapFiltersSelects = mapFilters.querySelectorAll('select');
-
-mapFiltersSelects.forEach(makeElementDisabled);
+makeFormActive('ad-form');
+makeFormActive('map__filters');
