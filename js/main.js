@@ -6,26 +6,26 @@ const tokioCenter = {
   y: 139.75000,
 };
 
-const makeFormInactive = (formClassName) => {
-  const form = document.querySelector(`.${formClassName}`);
-  form.classList.add(`.${formClassName}--disabled`);
+const disableElement = (el) => el.disabled = true;
+const enableElement = (el) => el.disabled = false;
+const setChildrenProp = (parent, selector, fn) => parent.querySelectorAll(selector).forEach(fn);
 
-  for (let child of form) {
-    child = child.disabled = true;
-  }
+const disableForm = (formSelector, ...selectors) => {
+  const form = document.querySelector(`${formSelector}`);
+  form.classList.add(`${formSelector}--disabled`);
+
+  selectors.forEach((selector) => setChildrenProp(form, selector, disableElement));
 };
 
-const makeFormActive = (formClassName) => {
-  const form = document.querySelector(`.${formClassName}`);
-  form.classList.remove(`.${formClassName}--disabled`);
+const enableForm = (formSelector, ...selectors) => {
+  const form = document.querySelector(`${formSelector}`);
+  form.classList.remove(`${formSelector}--disabled`);
 
-  for (let child of form) {
-    child = child.disabled = false;
-  }
+  selectors.forEach((selector) => setChildrenProp(form, selector, enableElement));
 };
 
-makeFormInactive('ad-form');
-makeFormInactive('map__filters');
+disableForm('.ad-form', 'fieldset');
+disableForm('.map__filters', 'fieldset', 'select');
 
-makeFormActive('ad-form');
-makeFormActive('map__filters');
+enableForm('.ad-form', 'fieldset');
+enableForm('.map__filters', 'fieldset', 'select');
