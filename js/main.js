@@ -2,8 +2,8 @@ import './popup.js'
 import './form.js'
 
 const tokioCenter = {
-  x: 35.67500,
-  y: 139.75000,
+  lat: 35.67500,
+  lng: 139.75000,
 };
 
 const disableElement = (el) => el.disabled = true;
@@ -27,5 +27,20 @@ const enableForm = (formSelector, ...selectors) => {
 disableForm('.ad-form', 'fieldset');
 disableForm('.map__filters', 'fieldset', 'select');
 
-enableForm('.ad-form', 'fieldset');
-enableForm('.map__filters', 'fieldset', 'select');
+const map = L.map('map-canvas')
+  .on('load', () => {
+    enableForm('.ad-form', 'fieldset');
+    enableForm('.map__filters', 'fieldset', 'select');
+  })
+  .setView({
+    lat: tokioCenter.lat,
+    lng: tokioCenter.lng,
+  }, 13);
+
+L.tileLayer(
+  'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+  {
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+  },
+).addTo(map);
+
