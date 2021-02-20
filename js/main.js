@@ -63,6 +63,6 @@ const address = document.querySelector('#address');
 address.readOnly = true;
 address.value = `${tokioCenter.lat}, ${tokioCenter.lng}`;
 
-mainMarker.on('moveend', (evt) => {
+mainMarker.on('drag', (evt) => {
   address.value = `${evt.target.getLatLng().lat.toFixed(5)}, ${evt.target.getLatLng().lng.toFixed(5)}`;
 });
