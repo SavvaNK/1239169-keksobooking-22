@@ -11,7 +11,7 @@ const popupTemplate = document.querySelector('#card')
   .content
   .querySelector('.popup');
 
-const mapCanvas = document.querySelector('#map-canvas');
+const mapCanvas = document.querySelector('#map-canvas'); // eslint-disable-line
 
 const fragment = document.createDocumentFragment();
 
