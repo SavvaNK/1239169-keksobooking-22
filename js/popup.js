@@ -47,7 +47,7 @@ const getDeclensionGuests = (guestsNumber) => guestsNumber === 1 ? 'гостя' 
 ads.forEach(({author, offer}) => {
   const popupClone = popupTemplate.cloneNode(true);
 
-  popupClone.querySelector('.popup__avatar').setAttribute('src', author.avatar);
+  popupClone.querySelector('.popup__avatar').src = author.avatar;
   popupClone.querySelector('.popup__title').textContent = offer.title;
   popupClone.querySelector('.popup__text--address').textContent = offer.address;
   popupClone.querySelector('.popup__text--price').innerHTML = `${offer.price} <span>₽/ночь<span>`;
@@ -73,7 +73,7 @@ ads.forEach(({author, offer}) => {
 
   offerPhotos.forEach((photo) => {
     const popupPhotoClone = popupPhotoEmpty.cloneNode();
-    popupPhotoClone.setAttribute('src', photo);
+    popupPhotoClone.src = photo;
     popupPhotos.appendChild(popupPhotoClone);
   });
 
