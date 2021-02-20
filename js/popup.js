@@ -82,4 +82,4 @@ ads.forEach(({author, offer}) => {
   fragment.appendChild(popupClone);
 });
 
-mapCanvas.appendChild(fragment.firstChild);
+// mapCanvas.appendChild(fragment.firstChild);
