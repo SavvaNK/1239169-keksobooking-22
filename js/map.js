@@ -1,5 +1,5 @@
 import { generateAd } from './data/generate-ad.js';
-import { MakePopup } from './popup.js';
+import { createPopup } from './popup.js';
 
 const disableElement = (el) => el.disabled = true;
 const enableElement = (el) => el.disabled = false;
@@ -92,7 +92,7 @@ ads.forEach((ad) => {
   marker
     .addTo(map)
     .bindPopup(
-      MakePopup(ad),
+      createPopup(ad),
       {
         keepInView: true,
       },
