@@ -64,5 +64,6 @@ address.readOnly = true;
 address.value = `${tokioCenter.lat}, ${tokioCenter.lng}`;
 
 mainMarker.on('drag', (evt) => {
-  address.value = `${evt.target.getLatLng().lat.toFixed(5)}, ${evt.target.getLatLng().lng.toFixed(5)}`;
+  const { lat, lng } = evt.target.getLatLng();
+  address.value = `${lat.toFixed(5)}, ${lng.toFixed(5)}`;
 });
