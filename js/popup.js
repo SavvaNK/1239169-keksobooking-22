@@ -1,19 +1,6 @@
-import { generateAd } from './data/generate-ad.js';
-
-const ads = new Array(10).fill(null).map(generateAd);
-
-console.log(  // eslint-disable-line
-  JSON.stringify(ads),
-  ads,
-);
-
 const popupTemplate = document.querySelector('#card')
   .content
   .querySelector('.popup');
-
-const mapCanvas = document.querySelector('#map-canvas'); // eslint-disable-line
-
-const fragment = document.createDocumentFragment();
 
 const typeDict = {
   'palace': 'Дворец',
@@ -80,4 +67,4 @@ const MakePopup = ({ author, offer }) => {
   return popupClone;
 };
 
-export { MakePopup, ads };
+export { MakePopup };
