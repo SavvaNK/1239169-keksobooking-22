@@ -1,4 +1,4 @@
-import './popup.js';
+import {ads, MakePopup } from './popup.js';
 import './form.js';
 
 const disableElement = (el) => el.disabled = true;
@@ -66,4 +66,34 @@ address.value = `${TokioCenter.LAT}, ${TokioCenter.LNG}`;
 mainMarker.on('drag', (evt) => {
   const { lat, lng } = evt.target.getLatLng();
   address.value = `${lat.toFixed(5)}, ${lng.toFixed(5)}`;
+});
+
+ads.forEach((ad) => {
+  const lat = (ad.offer.address).split(', ')[0];
+  const lng = (ad.offer.address).split(', ')[1];
+
+  const pinIcon = L.icon({ // eslint-disable-line
+    iconUrl: 'img/pin.svg',
+    iconSize: [48, 48],
+    iconAnchor: [24, 48],
+  });
+
+  const marker = L.marker( // eslint-disable-line
+    {
+      lat,
+      lng,
+    },
+    {
+      icon: pinIcon,
+    },
+  );
+
+  marker
+    .addTo(map)
+    .bindPopup( //Добавляет балуны
+      MakePopup(ad),
+      {
+        keepInView: true, //Балуны не появляются вне видимой области
+      },
+    );
 });
