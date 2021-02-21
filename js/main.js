@@ -69,8 +69,7 @@ mainMarker.on('drag', (evt) => {
 });
 
 ads.forEach((ad) => {
-  const lat = (ad.offer.address).split(', ')[0];
-  const lng = (ad.offer.address).split(', ')[1];
+  const [ lat, lng ] = ad.offer.address.split(', ');
 
   const pinIcon = L.icon({ // eslint-disable-line
     iconUrl: 'img/pin.svg',
@@ -90,10 +89,10 @@ ads.forEach((ad) => {
 
   marker
     .addTo(map)
-    .bindPopup( //Добавляет балуны
+    .bindPopup(
       MakePopup(ad),
       {
-        keepInView: true, //Балуны не появляются вне видимой области
+        keepInView: true,
       },
     );
 });
