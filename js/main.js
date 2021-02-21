@@ -44,8 +44,8 @@ L.tileLayer( // eslint-disable-line
 
 const mainIcon = L.icon({ // eslint-disable-line
   iconUrl: '../img/main-pin.svg',
-  iconSize: [60, 80],
-  iconAnchor: [30, 80],
+  iconSize: [48, 48],
+  iconAnchor: [24, 48],
 });
 
 const mainMarker = L.marker( // eslint-disable-line
