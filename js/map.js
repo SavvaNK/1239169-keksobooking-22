@@ -20,9 +20,9 @@ const enableForm = (formSelector, ...selectors) => {
 disableForm('.ad-form', 'fieldset');
 disableForm('.map__filters', 'fieldset', 'select');
 
-const TokioCenter = {
-  LAT: 35.67500,
-  LNG: 139.75000,
+const tokioCenter = {
+  lat: 35.67500,
+  lng: 139.75000,
 };
 
 const map = L.map('map-canvas') // eslint-disable-line
@@ -30,10 +30,7 @@ const map = L.map('map-canvas') // eslint-disable-line
     enableForm('.ad-form', 'fieldset');
     enableForm('.map__filters', 'fieldset', 'select');
   })
-  .setView({
-    lat: TokioCenter.LAT,
-    lng: TokioCenter.LNG,
-  }, 13);
+  .setView(tokioCenter, 13);
 
 L.tileLayer( // eslint-disable-line
   'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
@@ -49,10 +46,7 @@ const mainIcon = L.icon({ // eslint-disable-line
 });
 
 const mainMarker = L.marker( // eslint-disable-line
-  {
-    lat: TokioCenter.LAT,
-    lng: TokioCenter.LNG,
-  },
+  tokioCenter,
   {
     draggable: true,
     icon: mainIcon,
@@ -61,7 +55,7 @@ const mainMarker = L.marker( // eslint-disable-line
 
 const address = document.querySelector('#address');
 address.readOnly = true;
-address.value = `${TokioCenter.LAT}, ${TokioCenter.LNG}`;
+address.value = `${tokioCenter.lat}, ${tokioCenter.lng}`;
 
 mainMarker.on('drag', (evt) => {
   const { lat, lng } = evt.target.getLatLng();
