@@ -31,6 +31,25 @@ const getDeclensionRooms = (roomNumber) => {
 
 const getDeclensionGuests = (guestsNumber) => guestsNumber === 1 ? 'гостя' : 'гостей';
 
+// const popupProperties = [
+//   {
+//     selector: '.popup__avatar',
+//     properties: ['avatar'],
+//     attribute: 'src',
+//     value: `${properties[0]}`,
+//   },
+//   {
+//     selector: '.popup__title',
+//     attribute: 'textContent',
+//   },
+//   {
+//     selector: '.popup__title',
+//     attribute: 'textContent',
+//   },
+// ];
+
+
+
 const createPopup = ({ author, offer }) => {
   const { avatar } = author;
   const { address, checkin, checkout, description, features: offerFeatures, guests, photos, price, rooms, title, type } = offer;
