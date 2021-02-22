@@ -20,17 +20,23 @@ const enableForm = (formSelector, ...selectors) => {
 disableForm('.ad-form', 'fieldset');
 disableForm('.map__filters', 'fieldset', 'select');
 
-const tokioCenter = {
+const tokioCenter = Object.freeze({
   lat: 35.67500,
   lng: 139.75000,
-};
+});
+
+const ICON_SIZE = Object.freeze([48, 48]);
+const ICON_ANCHOR_SIZE = Object.freeze([24, 48]);
+const ADS_QUANTITY = 10;
+const PRECISION_AFTER_POINT = 5;
+const MAP_ZOOM = 13;
 
 const map = L.map('map-canvas') // eslint-disable-line
   .on('load', () => {
     enableForm('.ad-form', 'fieldset');
     enableForm('.map__filters', 'fieldset', 'select');
   })
-  .setView(tokioCenter, 13);
+  .setView(tokioCenter, MAP_ZOOM);
 
 L.tileLayer( // eslint-disable-line
   'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
@@ -41,8 +47,8 @@ L.tileLayer( // eslint-disable-line
 
 const mainIcon = L.icon({ // eslint-disable-line
   iconUrl: '../img/main-pin.svg',
-  iconSize: [48, 48],
-  iconAnchor: [24, 48],
+  iconSize: ICON_SIZE,
+  iconAnchor: ICON_ANCHOR_SIZE,
 });
 
 const mainMarker = L.marker( // eslint-disable-line
@@ -59,18 +65,18 @@ address.value = `${tokioCenter.lat}, ${tokioCenter.lng}`;
 
 mainMarker.on('drag', (evt) => {
   const { lat, lng } = evt.target.getLatLng();
-  address.value = `${lat.toFixed(5)}, ${lng.toFixed(5)}`;
+  address.value = `${lat.toFixed(PRECISION_AFTER_POINT)}, ${lng.toFixed(PRECISION_AFTER_POINT)}`;
 });
 
-const ads = new Array(10).fill(null).map(generateAd);
+const ads = new Array(ADS_QUANTITY).fill(null).map(generateAd);
 
 ads.forEach((ad) => {
   const [ lat, lng ] = ad.offer.address.split(', ');
 
   const pinIcon = L.icon({ // eslint-disable-line
     iconUrl: 'img/pin.svg',
-    iconSize: [48, 48],
-    iconAnchor: [24, 48],
+    iconSize: ICON_SIZE,
+    iconAnchor: ICON_ANCHOR_SIZE,
   });
 
   const marker = L.marker( // eslint-disable-line
