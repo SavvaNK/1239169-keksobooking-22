@@ -1,3 +1,5 @@
+/* global L:readonly */
+
 import { generateAd } from './data/generate-ad.js';
 import { createPopup } from './popup.js';
 
@@ -31,27 +33,27 @@ const ADS_QUANTITY = 10;
 const PRECISION_AFTER_POINT = 5;
 const MAP_ZOOM = 13;
 
-const map = L.map('map-canvas') // eslint-disable-line
+const map = L.map('map-canvas')
   .on('load', () => {
     enableForm('.ad-form', 'fieldset');
     enableForm('.map__filters', 'fieldset', 'select');
   })
   .setView(tokioCenter, MAP_ZOOM);
 
-L.tileLayer( // eslint-disable-line
+L.tileLayer(
   'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
   {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
   },
 ).addTo(map);
 
-const mainIcon = L.icon({ // eslint-disable-line
+const mainIcon = L.icon({
   iconUrl: '../img/main-pin.svg',
   iconSize: ICON_SIZE,
   iconAnchor: ICON_ANCHOR_SIZE,
 });
 
-const mainMarker = L.marker( // eslint-disable-line
+const mainMarker = L.marker(
   tokioCenter,
   {
     draggable: true,
@@ -73,13 +75,13 @@ const ads = new Array(ADS_QUANTITY).fill(null).map(generateAd);
 ads.forEach((ad) => {
   const [ lat, lng ] = ad.offer.address.split(', ');
 
-  const pinIcon = L.icon({ // eslint-disable-line
+  const pinIcon = L.icon({
     iconUrl: 'img/pin.svg',
     iconSize: ICON_SIZE,
     iconAnchor: ICON_ANCHOR_SIZE,
   });
 
-  const marker = L.marker( // eslint-disable-line
+  const marker = L.marker(
     {
       lat,
       lng,
