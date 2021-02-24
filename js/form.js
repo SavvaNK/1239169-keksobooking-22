@@ -53,7 +53,7 @@ const onChangeRoomNumber = () => {
   const value = roomNumber.value;
   const children = capacity.children;
   for (const child of children) {
-    child.value > value ? child.disabled = true :  child.disabled = false;
+    roomsCapacity[value].includes(child.value) ? child.disabled = false :  child.disabled = true;
   }
 };
 
