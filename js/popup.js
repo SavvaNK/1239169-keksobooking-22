@@ -18,6 +18,7 @@ const getDeclensionRooms = (roomNumber) => {
   if (RegExp('[2-4]$').test(roomNumber)) {
     result = 'комнаты';
   }
+
   if (RegExp('1$').test(roomNumber)) {
     result = 'комната';
   }
@@ -29,7 +30,20 @@ const getDeclensionRooms = (roomNumber) => {
   return result;
 };
 
-const getDeclensionGuests = (guestsNumber) => guestsNumber === 1 ? 'гостя' : 'гостей';
+const getDeclensionGuests = (guestsNumber) => {
+  guestsNumber = guestsNumber.toString();
+  let result = 'гостей';
+
+  if (RegExp('1$').test(guestsNumber)) {
+    result = 'гостя';
+  }
+
+  if (RegExp('11$').test(guestsNumber)) {
+    result = 'гостей';
+  }
+
+  return result;
+}
 
 const createPopup = ({ author, offer }) => {
   const { avatar } = author;
