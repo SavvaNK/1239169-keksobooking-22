@@ -17,7 +17,8 @@ const roomsCapacity = {
   1: getArrayOfRange(1, 1),
   2: getArrayOfRange(1, 2),
   3: getArrayOfRange(1, 3),
-  'alert': 'Количество гостей не может быть больше количества комнат!',
+  100: getArrayOfRange(0, 0),
+  alert: 'Количество гостей не может быть больше количества комнат!',
 };
 
 const inputPrice = document.querySelector('#price');
