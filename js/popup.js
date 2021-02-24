@@ -31,47 +31,6 @@ const getDeclensionRooms = (roomNumber) => {
 
 const getDeclensionGuests = (guestsNumber) => guestsNumber === 1 ? 'гостя' : 'гостей';
 
-// const popupProperties = [
-//   {
-//     selector: '.popup__avatar',
-//     properties: ['avatar'],
-//     attribute: 'src',
-//     fnBody: `${prop1}`,
-//   },
-//   {
-//     selector: '.popup__title',
-//     properties: ['title'],
-//     attribute: 'textContent',
-//     fnBody: `${prop1}`,
-//   },
-//   {
-//     selector: '.popup__text--address',
-//     properties: ['address'],
-//     attribute: 'textContent',
-//     fnBody: `${prop1}`,
-//   },
-// ];
-
-// const fillElement = ({parentSelector , selector, properties, attribute, fnBody}) => {
-//
-//   if (properties.every(property => property)) {
-//
-//   }
-// }
-//
-// const fillElement = (parentSelector, childSelector, object, propertyNames, attribute, value) => {
-//
-//   const element = parentSelector.querySelector(childSelector);
-//   const stringAttr = Object.keys({...propertyNames});
-//   const fnc = new Function(stringAttr, `return ${value}`);
-//   propertyNames.every(property => property) ? element.setAttribute(attribute, fnc()) : element.remove();
-// };
-
-// const assignAttribute = (parentSelector, childSelector, valueToSet, attribute = 'innerText') => {
-//   const element = parentSelector.querySelector(childSelector);
-//   valueToSet ? element.setAttribute(attribute, valueToSet) : element.remove();
-// }
-
 const createPopup = ({ author, offer }) => {
   const { avatar } = author;
   const { address, checkin, checkout, description, features, guests, photos, price, rooms, title, type } = offer;
