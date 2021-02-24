@@ -5,22 +5,6 @@ const minPriceForType = {
   bungalow: 0,
 };
 
-const getArrayOfRange = (start, end, step = 1) => {
-  const result = [];
-  for (let current = start; step < 0 ? current >= end : current <= end; current += step) {
-    result.push(current);
-  }
-  return result;
-};
-
-const roomsCapacity = {
-  1: getArrayOfRange(1, 1),
-  2: getArrayOfRange(1, 2),
-  3: getArrayOfRange(1, 3),
-  100: getArrayOfRange(0, 0),
-  alert: 'Количество гостей не может быть больше количества комнат!',
-};
-
 const inputPrice = document.querySelector('#price');
 const inputType = document.querySelector('#type');
 
@@ -45,3 +29,34 @@ const syncTimeOut = () => {
 
 inputTimeIn.addEventListener('change', syncTimeOut);
 inputTimeOut.addEventListener('change', syncTimeIn);
+
+const getArrayOfRange = (start, end, step = 1) => {
+  const result = [];
+  for (let current = start; step < 0 ? current >= end : current <= end; current += step) {
+    result.push(current);
+  }
+  return result;
+};
+
+const roomsCapacity = {
+  1: getArrayOfRange(1, 1),
+  2: getArrayOfRange(1, 2),
+  3: getArrayOfRange(1, 3),
+  100: getArrayOfRange(0, 0),
+  alert: 'Количество гостей не может быть больше количества комнат!',
+};
+
+const roomNumber = document.querySelector('#room_number');
+const capacity = document.querySelector('#capacity');
+
+const onChangeRoomNumber = () => {
+  const value = roomNumber.value;
+  const children = capacity.children;
+  for (const child of children) {
+    child.value > value ? child.disabled = true :  child.disabled = false;
+  }
+};
+
+roomNumber.addEventListener('change', onChangeRoomNumber);
+
+capacity.addEventListener('mouseover', onChangeRoomNumber);
