@@ -5,6 +5,21 @@ const minPriceForType = {
   bungalow: 0,
 };
 
+const getArrayOfRange = (start, end, step = 1) => {
+  const result = [];
+  for (let current = start; step < 0 ? current >= end : current <= end; current += step) {
+    result.push(current);
+  }
+  return result;
+};
+
+const roomsCapacity = {
+  1: getArrayOfRange(1, 1),
+  2: getArrayOfRange(1, 2),
+  3: getArrayOfRange(1, 3),
+  'alert': 'Количество гостей не может быть больше количества комнат!',
+};
+
 const inputPrice = document.querySelector('#price');
 const inputType = document.querySelector('#type');
 
