@@ -77,13 +77,14 @@ const createPopup = ({ author, offer }) => {
     ? popupDescription.textContent = description
     : popupDescription.remove();
 
+  const popupFeatures = popup.querySelector('.popup__features');
   features
     ? featuresList.forEach((feature) => {
       if(!features.includes(feature)) {
-        popup.querySelector(`.popup__feature--${feature}`).remove();
+        popupFeatures.querySelector(`.popup__feature--${feature}`).remove();
       }
     })
-    : popup.querySelector('.popup__features').remove();
+    : popupFeatures.remove();
 
   const popupPhotos = popup.querySelector('.popup__photos');
   if (photos) {
