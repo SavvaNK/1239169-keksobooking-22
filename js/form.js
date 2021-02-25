@@ -46,13 +46,13 @@ const roomsCapacity = {
   alert: 'Количество гостей не может быть больше количества комнат!',
 };
 
-const roomNumber = document.querySelector('#room_number');
-const capacity = document.querySelector('#capacity');
+const selectRoomNumber = document.querySelector('#room_number');
+const selectCapacity = document.querySelector('#capacity');
 
 const syncCapacityWithRoomNumber = () => {
-  const rooms = roomNumber.value;
+  const rooms = selectRoomNumber.value;
   const roomCapacity = roomsCapacity[rooms];
-  const options = capacity.children;
+  const options = selectCapacity.children;
   for (const option of options) {
     // ля, как же у меня тут горело, сутки горело, код не работал как задумано, а оказывается option.value стринга, а не int
     // console.log(typeof(option.value));
@@ -62,5 +62,5 @@ const syncCapacityWithRoomNumber = () => {
   }
 };
 
-roomNumber.addEventListener('change', syncCapacityWithRoomNumber);
-capacity.addEventListener('focus', syncCapacityWithRoomNumber);
+selectRoomNumber.addEventListener('change', syncCapacityWithRoomNumber);
+selectCapacity.addEventListener('focus', syncCapacityWithRoomNumber);
