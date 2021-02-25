@@ -57,8 +57,8 @@ const syncCapacityWithRoomNumber = () => {
     // ля, как же у меня тут горело, сутки горело, код не работал как задумано, а оказывается option.value стринга, а не int
     // console.log(typeof(option.value));
     const value = option.value;
-    roomCapacity.includes(value) ? option.disabled = false :  option.disabled = true;
-    value === rooms ? option.selected = true : option.selected = false;
+    option.disabled = !roomCapacity.includes(value);
+    option.selected = roomsCapacity[rooms].includes(value);
   }
 };
 
