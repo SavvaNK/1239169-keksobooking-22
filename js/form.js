@@ -33,7 +33,7 @@ inputTimeOut.addEventListener('change', syncTimeIn);
 const getArrayOfRange = (start, end, step = 1) => {
   const result = [];
   for (let current = start; step < 0 ? current >= end : current <= end; current += step) {
-    result.push(current);
+    result.push(current.toString());
   }
   return result;
 };
@@ -49,14 +49,18 @@ const roomsCapacity = {
 const roomNumber = document.querySelector('#room_number');
 const capacity = document.querySelector('#capacity');
 
-const onChangeRoomNumber = () => {
-  const value = roomNumber.value;
-  const children = capacity.children;
-  for (const child of children) {
-    roomsCapacity[value].includes(child.value) ? child.disabled = false :  child.disabled = true;
+const syncCapacityWithRoomNumber = () => {
+  const rooms = roomNumber.value;
+  const roomCapacity = roomsCapacity[rooms];
+  const options = capacity.children;
+  for (const option of options) {
+    // ля, как же у меня тут горело, сутки горело, код не работал как задумано, а оказывается option.value стринга, а не int
+    // console.log(typeof(option.value));
+    const value = option.value;
+    roomCapacity.includes(value) ? option.disabled = false :  option.disabled = true;
+    value === rooms ? option.selected = true : option.selected = false;
   }
 };
 
-roomNumber.addEventListener('change', onChangeRoomNumber);
-
-capacity.addEventListener('mouseover', onChangeRoomNumber);
+roomNumber.addEventListener('change', syncCapacityWithRoomNumber);
+capacity.addEventListener('focus', syncCapacityWithRoomNumber);
