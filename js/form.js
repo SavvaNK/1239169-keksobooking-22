@@ -40,12 +40,13 @@ const getArrayOfRange = (start, end, step = 1) => {
   return result;
 };
 
-const roomsCapacity = {
-  1: getArrayOfRange(1, 1),
-  2: getArrayOfRange(1, 2),
-  3: getArrayOfRange(1, 3),
-  100: getArrayOfRange(0, 0),
-  alert: 'Количество гостей не может быть больше количества комнат!',
+const capacityInvalidMessage = 'Количество гостей не может быть больше количества комнат!';
+
+const roomsCapacityData = {
+  1: {roomCapacity: getArrayOfRange(1, 1), alert: capacityInvalidMessage},
+  2: {roomCapacity: getArrayOfRange(1, 2), alert: capacityInvalidMessage},
+  3: {roomCapacity: getArrayOfRange(1, 3), alert: capacityInvalidMessage},
+  100: {roomCapacity: getArrayOfRange(0, 0), alert: 'Не для гостей!'},
 };
 
 const selectRoomNumber = adForm.querySelector('#room_number');
@@ -53,14 +54,15 @@ const selectCapacity = adForm.querySelector('#capacity');
 
 const syncCapacityWithRoomNumber = () => {
   const rooms = selectRoomNumber.value;
-  const roomCapacity = roomsCapacity[rooms];
+  const { roomCapacity } = roomsCapacityData[rooms];
   const options = selectCapacity.children;
   for (const option of options) {
     // ля, как же у меня тут горело, сутки горело, код не работал как задумано, а оказывается option.value стринга, а не int
     // console.log(typeof(option.value));
     const value = option.value;
-    option.disabled = !roomCapacity.includes(value);
-    option.selected = roomsCapacity[rooms].includes(value);
+    const isRoomCapacityOk = roomCapacity.includes(value);
+    option.disabled = !isRoomCapacityOk;
+    option.selected = isRoomCapacityOk;
   }
 };
 
