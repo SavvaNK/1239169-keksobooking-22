@@ -66,3 +66,21 @@ const syncCapacityWithRoomNumber = () => {
 
 selectRoomNumber.addEventListener('change', syncCapacityWithRoomNumber);
 selectCapacity.addEventListener('focus', syncCapacityWithRoomNumber);
+
+const inputTitleLimits = {
+  MIN_LENGTH: 30,
+  MAX_LENGTH: 100,
+};
+
+const inputTitle = adForm.querySelector('#title');
+
+const validateRequired = (evt) => {
+  const el = evt.target;
+  el.setCustomValidity('');
+  if (el.validity.valueMissing) {
+    el.setCustomValidity('Обязательное поле!');
+  }
+};
+
+inputTitle.addEventListener('invalid', validateRequired);
+inputPrice.addEventListener('invalid', validateRequired);
