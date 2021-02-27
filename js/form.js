@@ -1,3 +1,5 @@
+const adForm = document.querySelector('.ad-form');
+
 const minPriceForType = {
   palace: 10000,
   flat: 1000,
@@ -5,8 +7,8 @@ const minPriceForType = {
   bungalow: 0,
 };
 
-const inputPrice = document.querySelector('#price');
-const inputType = document.querySelector('#type');
+const inputPrice = adForm.querySelector('#price');
+const inputType = adForm.querySelector('#type');
 
 const setMinPrice = () => {
   const minPriceValue = minPriceForType[inputType['value']];
@@ -16,8 +18,8 @@ const setMinPrice = () => {
 
 inputType.addEventListener('change', setMinPrice);
 
-const inputTimeIn = document.querySelector('#timein');
-const inputTimeOut = document.querySelector('#timeout');
+const inputTimeIn = adForm.querySelector('#timein');
+const inputTimeOut = adForm.querySelector('#timeout');
 
 const syncTimeIn = () => {
   inputTimeIn.value = inputTimeOut.value;
@@ -46,8 +48,8 @@ const roomsCapacity = {
   alert: 'Количество гостей не может быть больше количества комнат!',
 };
 
-const selectRoomNumber = document.querySelector('#room_number');
-const selectCapacity = document.querySelector('#capacity');
+const selectRoomNumber = adForm.querySelector('#room_number');
+const selectCapacity = adForm.querySelector('#capacity');
 
 const syncCapacityWithRoomNumber = () => {
   const rooms = selectRoomNumber.value;
