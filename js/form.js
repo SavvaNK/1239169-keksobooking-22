@@ -7,30 +7,30 @@ const minPriceForType = {
   bungalow: 0,
 };
 
-const inputPrice = adForm.querySelector('#price');
-const inputType = adForm.querySelector('#type');
+const priceInput = adForm.querySelector('#price');
+const typeInput = adForm.querySelector('#type');
 
 const setMinPrice = () => {
-  const minPriceValue = minPriceForType[inputType['value']];
-  inputPrice.min = minPriceValue;
-  inputPrice.placeholder = minPriceValue;
+  const minPriceValue = minPriceForType[typeInput['value']];
+  priceInput.min = minPriceValue;
+  priceInput.placeholder = minPriceValue;
 };
 
-inputType.addEventListener('change', setMinPrice);
+typeInput.addEventListener('change', setMinPrice);
 
-const inputTimeIn = adForm.querySelector('#timein');
-const inputTimeOut = adForm.querySelector('#timeout');
+const timeInInput = adForm.querySelector('#timein');
+const timeOutInput = adForm.querySelector('#timeout');
 
 const syncTimeIn = () => {
-  inputTimeIn.value = inputTimeOut.value;
+  timeInInput.value = timeOutInput.value;
 };
 
 const syncTimeOut = () => {
-  inputTimeOut.value = inputTimeIn.value;
+  timeOutInput.value = timeInInput.value;
 };
 
-inputTimeIn.addEventListener('change', syncTimeOut);
-inputTimeOut.addEventListener('change', syncTimeIn);
+timeInInput.addEventListener('change', syncTimeOut);
+timeOutInput.addEventListener('change', syncTimeIn);
 
 const getArrayOfRange = (start, end, step = 1) => {
   const result = [];
@@ -49,13 +49,13 @@ const roomsCapacityData = {
   100: {roomCapacity: getArrayOfRange(0, 0), alert: 'Не для гостей!'},
 };
 
-const selectRoomNumber = adForm.querySelector('#room_number');
-const selectCapacity = adForm.querySelector('#capacity');
+const roomNumberSelect = adForm.querySelector('#room_number');
+const capacitySelect = adForm.querySelector('#capacity');
 
 const syncCapacityWithRoomNumber = () => {
-  const rooms = selectRoomNumber.value;
+  const rooms = roomNumberSelect.value;
   const { roomCapacity } = roomsCapacityData[rooms];
-  const options = selectCapacity.children;
+  const options = capacitySelect.children;
   for (const option of options) {
     // ля, как же у меня тут горело, сутки горело, код не работал как задумано, а оказывается option.value стринга, а не int
     // console.log(typeof(option.value));
@@ -66,15 +66,15 @@ const syncCapacityWithRoomNumber = () => {
   }
 };
 
-selectRoomNumber.addEventListener('change', syncCapacityWithRoomNumber);
-selectCapacity.addEventListener('focus', syncCapacityWithRoomNumber);
+roomNumberSelect.addEventListener('change', syncCapacityWithRoomNumber);
+capacitySelect.addEventListener('focus', syncCapacityWithRoomNumber);
 
-const inputTitleLimits = {
+const titleInputLimits = {
   MIN_LENGTH: 30,
   MAX_LENGTH: 100,
 };
 
-const inputTitle = adForm.querySelector('#title');
+const titleInput = adForm.querySelector('#title');
 
 const validateRequired = (evt) => {
   const el = evt.target;
@@ -84,5 +84,5 @@ const validateRequired = (evt) => {
   }
 };
 
-inputTitle.addEventListener('invalid', validateRequired);
-inputPrice.addEventListener('invalid', validateRequired);
+titleInput.addEventListener('invalid', validateRequired);
+priceInput.addEventListener('invalid', validateRequired);
