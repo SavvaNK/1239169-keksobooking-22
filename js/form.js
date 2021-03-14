@@ -57,8 +57,6 @@ const syncCapacityWithRoomNumber = () => {
   const { roomCapacity } = roomsCapacityData[rooms];
   const options = capacitySelect.children;
   for (const option of options) {
-    // ля, как же у меня тут горело, сутки горело, код не работал как задумано, а оказывается option.value стринга, а не int
-    // console.log(typeof(option.value));
     const value = option.value;
     const isRoomCapacityOk = roomCapacity.includes(value);
     option.disabled = !isRoomCapacityOk;
@@ -76,13 +74,35 @@ const titleInputLimits = {
 
 const titleInput = adForm.querySelector('#title');
 
-const validateRequired = (evt) => {
-  const el = evt.target;
-  el.setCustomValidity('');
-  if (el.validity.valueMissing) {
-    el.setCustomValidity('Обязательное поле!');
+const resetCustomValidityMessage = (element) => {
+  element.setCustomValidity('');
+};
+
+const setCustomValidityValueMissingMessage = (element) => {
+  if (element.validity.valueMissing) {
+    element.setCustomValidity('Обязательное поле!');
   }
 };
 
-titleInput.addEventListener('invalid', validateRequired);
-priceInput.addEventListener('invalid', validateRequired);
+const setCustomValidityTooShortMessage = (element) => {
+  const minLength = element.minLength;
+  if (element.validity.tooShort) {
+    element.setCustomValidity(`Должно быть минимум ${minLength} знаков!`);
+  }
+};
+
+const onPriceInputInvalid = (evt) => {
+  const el = evt.target;
+  resetCustomValidityMessage(el);
+  setCustomValidityValueMissingMessage(el);
+};
+
+const onTitleInputInvalid = (evt) => {
+  const el = evt.target;
+  resetCustomValidityMessage(el);
+  setCustomValidityValueMissingMessage(el);
+  setCustomValidityTooShortMessage(el);
+};
+
+titleInput.addEventListener('invalid', onTitleInputInvalid);
+priceInput.addEventListener('invalid', onPriceInputInvalid);
