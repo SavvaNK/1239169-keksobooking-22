@@ -1,3 +1,5 @@
+const adForm = document.querySelector('.ad-form');
+
 const minPriceForType = {
   palace: 10000,
   flat: 1000,
@@ -5,27 +7,112 @@ const minPriceForType = {
   bungalow: 0,
 };
 
-const inputPrice = document.querySelector('#price');
-const inputType = document.querySelector('#type');
+const priceInput = adForm.querySelector('#price');
+const typeInput = adForm.querySelector('#type');
 
 const setMinPrice = () => {
-  const minPriceValue = minPriceForType[inputType['value']];
-  inputPrice.min = minPriceValue;
-  inputPrice.placeholder = minPriceValue;
+  const minPriceValue = minPriceForType[typeInput['value']];
+  priceInput.min = minPriceValue;
+  priceInput.placeholder = minPriceValue;
 };
 
-inputType.addEventListener('change', setMinPrice);
+typeInput.addEventListener('change', setMinPrice);
 
-const inputTimeIn = document.querySelector('#timein');
-const inputTimeOut = document.querySelector('#timeout');
+const timeInInput = adForm.querySelector('#timein');
+const timeOutInput = adForm.querySelector('#timeout');
 
 const syncTimeIn = () => {
-  inputTimeIn.value = inputTimeOut.value;
+  timeInInput.value = timeOutInput.value;
 };
 
 const syncTimeOut = () => {
-  inputTimeOut.value = inputTimeIn.value;
+  timeOutInput.value = timeInInput.value;
 };
 
-inputTimeIn.addEventListener('change', syncTimeOut);
-inputTimeOut.addEventListener('change', syncTimeIn);
+timeInInput.addEventListener('change', syncTimeOut);
+timeOutInput.addEventListener('change', syncTimeIn);
+
+const getArrayOfRange = (start, end, step = 1) => {
+  const result = [];
+  for (let current = start; step < 0 ? current >= end : current <= end; current += step) {
+    result.push(current.toString());
+  }
+  return result;
+};
+
+const capacityInvalidMessage = 'Количество гостей не может быть больше количества комнат!';
+
+const roomsCapacityData = {
+  1: {roomCapacity: getArrayOfRange(1, 1), alert: capacityInvalidMessage},
+  2: {roomCapacity: getArrayOfRange(1, 2), alert: capacityInvalidMessage},
+  3: {roomCapacity: getArrayOfRange(1, 3), alert: capacityInvalidMessage},
+  100: {roomCapacity: getArrayOfRange(0, 0), alert: 'Не для гостей!'},
+};
+
+const roomNumberSelect = adForm.querySelector('#room_number');
+const capacitySelect = adForm.querySelector('#capacity');
+
+const syncCapacityWithRoomNumber = () => {
+  const rooms = roomNumberSelect.value;
+  const { roomCapacity } = roomsCapacityData[rooms];
+  const options = capacitySelect.children;
+  for (const option of options) {
+    const value = option.value;
+    const isRoomCapacityOk = roomCapacity.includes(value);
+    option.disabled = !isRoomCapacityOk;
+    option.selected = isRoomCapacityOk;
+  }
+};
+
+roomNumberSelect.addEventListener('change', syncCapacityWithRoomNumber);
+capacitySelect.addEventListener('focus', syncCapacityWithRoomNumber);
+
+const titleInput = adForm.querySelector('#title');
+
+const resetCustomValidityMessage = (element) => {
+  element.setCustomValidity('');
+};
+
+const setCustomValidityValueMissingMessage = (element) => {
+  if (element.validity.valueMissing) {
+    element.setCustomValidity('Обязательное поле!');
+  }
+};
+
+const setCustomValidityTooShortMessage = (element) => {
+  const minLength = element.minLength;
+  if (element.validity.tooShort) {
+    element.setCustomValidity(`Должно быть минимум ${minLength} знаков!`);
+  }
+};
+
+const setCustomValidityTooLongMessage = (element) => {
+  const maxLength = element.maxLength;
+  if (element.validity.tooLong) {
+    element.setCustomValidity(`Должно быть максимум ${maxLength} знаков!`);
+  }
+};
+
+const setCustomValidityTypeMismatchMessage = (element) => {
+  if (element.validity.typeMismatch) {
+    element.setCustomValidity('Введён неверный тип данных!');
+  }
+};
+
+const onPriceInputInvalid = (evt) => {
+  const el = evt.target;
+  resetCustomValidityMessage(el);
+  setCustomValidityValueMissingMessage(el);
+  setCustomValidityTypeMismatchMessage(el);
+};
+
+const onTitleInputInvalid = (evt) => {
+  const el = evt.target;
+  resetCustomValidityMessage(el);
+  setCustomValidityValueMissingMessage(el);
+  setCustomValidityTooShortMessage(el);
+  setCustomValidityTooLongMessage(el);
+};
+
+titleInput.addEventListener('invalid', onTitleInputInvalid);
+priceInput.addEventListener('invalid', onPriceInputInvalid);

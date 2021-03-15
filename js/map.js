@@ -1,3 +1,5 @@
+/* global L:readonly */
+
 import { generateAd } from './data/generate-ad.js';
 import { createPopup } from './popup.js';
 
@@ -20,39 +22,39 @@ const enableForm = (formSelector, ...selectors) => {
 disableForm('.ad-form', 'fieldset');
 disableForm('.map__filters', 'fieldset', 'select');
 
-const TokioCenter = {
-  LAT: 35.67500,
-  LNG: 139.75000,
-};
+const tokioCenter = Object.freeze({
+  lat: 35.67500,
+  lng: 139.75000,
+});
 
-const map = L.map('map-canvas') // eslint-disable-line
+const ICON_SIZE = Object.freeze([48, 48]);
+const ICON_ANCHOR_SIZE = Object.freeze([24, 48]);
+const ADS_QUANTITY = 10;
+const PRECISION_AFTER_POINT = 5;
+const MAP_ZOOM = 13;
+
+const map = L.map('map-canvas')
   .on('load', () => {
     enableForm('.ad-form', 'fieldset');
     enableForm('.map__filters', 'fieldset', 'select');
   })
-  .setView({
-    lat: TokioCenter.LAT,
-    lng: TokioCenter.LNG,
-  }, 13);
+  .setView(tokioCenter, MAP_ZOOM);
 
-L.tileLayer( // eslint-disable-line
+L.tileLayer(
   'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
   {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
   },
 ).addTo(map);
 
-const mainIcon = L.icon({ // eslint-disable-line
+const mainIcon = L.icon({
   iconUrl: '../img/main-pin.svg',
-  iconSize: [48, 48],
-  iconAnchor: [24, 48],
+  iconSize: ICON_SIZE,
+  iconAnchor: ICON_ANCHOR_SIZE,
 });
 
-const mainMarker = L.marker( // eslint-disable-line
-  {
-    lat: TokioCenter.LAT,
-    lng: TokioCenter.LNG,
-  },
+const mainMarker = L.marker(
+  tokioCenter,
   {
     draggable: true,
     icon: mainIcon,
@@ -61,25 +63,25 @@ const mainMarker = L.marker( // eslint-disable-line
 
 const address = document.querySelector('#address');
 address.readOnly = true;
-address.value = `${TokioCenter.LAT}, ${TokioCenter.LNG}`;
+address.value = `${tokioCenter.lat}, ${tokioCenter.lng}`;
 
 mainMarker.on('drag', (evt) => {
   const { lat, lng } = evt.target.getLatLng();
-  address.value = `${lat.toFixed(5)}, ${lng.toFixed(5)}`;
+  address.value = `${lat.toFixed(PRECISION_AFTER_POINT)}, ${lng.toFixed(PRECISION_AFTER_POINT)}`;
 });
 
-const ads = new Array(10).fill(null).map(generateAd);
+const ads = new Array(ADS_QUANTITY).fill(null).map(generateAd);
 
 ads.forEach((ad) => {
   const [ lat, lng ] = ad.offer.address.split(', ');
 
-  const pinIcon = L.icon({ // eslint-disable-line
+  const pinIcon = L.icon({
     iconUrl: 'img/pin.svg',
-    iconSize: [48, 48],
-    iconAnchor: [24, 48],
+    iconSize: ICON_SIZE,
+    iconAnchor: ICON_ANCHOR_SIZE,
   });
 
-  const marker = L.marker( // eslint-disable-line
+  const marker = L.marker(
     {
       lat,
       lng,

@@ -9,7 +9,7 @@ const typeDict = {
   'bungalow': 'Бунгало',
 };
 
-const features = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner'];
+const featuresList = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner'];
 
 const getDeclensionRooms = (roomNumber) => {
   roomNumber = roomNumber.toString();
@@ -18,6 +18,7 @@ const getDeclensionRooms = (roomNumber) => {
   if (RegExp('[2-4]$').test(roomNumber)) {
     result = 'комнаты';
   }
+
   if (RegExp('1$').test(roomNumber)) {
     result = 'комната';
   }
@@ -29,37 +30,88 @@ const getDeclensionRooms = (roomNumber) => {
   return result;
 };
 
-const getDeclensionGuests = (guestsNumber) => guestsNumber === 1 ? 'гостя' : 'гостей';
+const getDeclensionGuests = (guestsNumber) => {
+  guestsNumber = guestsNumber.toString();
+  let result = 'гостей';
+
+  if (RegExp('1$').test(guestsNumber)) {
+    result = 'гостя';
+  }
+
+  if (RegExp('11$').test(guestsNumber)) {
+    result = 'гостей';
+  }
+
+  return result;
+}
 
 const createPopup = ({ author, offer }) => {
   const { avatar } = author;
-  const { address, checkin, checkout, description, features: offerFeatures, guests, photos, price, rooms, title, type } = offer;
+  const { address, checkin, checkout, description, features, guests, photos, price, rooms, title, type } = offer;
 
   const popup = popupTemplate.cloneNode(true);
 
-  popup.querySelector('.popup__avatar').src = avatar;
-  popup.querySelector('.popup__title').textContent = title;
-  popup.querySelector('.popup__text--address').textContent = address;
-  popup.querySelector('.popup__text--price').innerHTML = `${price} <span>₽/ночь<span>`;
-  popup.querySelector('.popup__type').textContent = typeDict[type];
-  popup.querySelector('.popup__text--capacity').textContent = `${rooms} ${getDeclensionRooms(rooms)} для ${guests} ${getDeclensionGuests(guests)}`;
-  popup.querySelector('.popup__text--time').textContent = `Заезд после ${checkin}, выезд до ${checkout}`;
-  popup.querySelector('.popup__description').textContent = description;
+  const popupAvatar = popup.querySelector('.popup__avatar');
+  avatar
+    ? popupAvatar.src = avatar
+    : popupAvatar.remove();
 
-  features.forEach((feature) => {
-    if(!offerFeatures.includes(feature)) {
-      popup.querySelector(`.popup__feature--${feature}`).remove();
-    }
-  });
+  const popupTitle = popup.querySelector('.popup__title');
+  title
+    ? popupTitle.textContent = title
+    : popupTitle.remove();
+
+  const popupAddress = popup.querySelector('.popup__text--address');
+  address
+    ? popupAddress.textContent = address
+    : popupAddress.remove();
+
+  const popupPrice = popup.querySelector('.popup__text--price');
+  price
+    ? popupPrice.innerHTML = `${price} <span>₽/ночь<span>`
+    : popupPrice.remove();
+
+  const popupType = popup.querySelector('.popup__type');
+  type
+    ? popupType.textContent = typeDict[type]
+    : popupType.remove();
+
+  const popupCapacity = popup.querySelector('.popup__text--capacity');
+  rooms && guests
+    ? popupCapacity.textContent = `${rooms} ${getDeclensionRooms(rooms)} для ${guests} ${getDeclensionGuests(guests)}`
+    : popupCapacity.remove();
+
+  const popupTime = popup.querySelector('.popup__text--time');
+  checkin && checkout
+    ? popupTime.textContent = `Заезд после ${checkin}, выезд до ${checkout}`
+    : popupTime.remove();
+
+  const popupDescription = popup.querySelector('.popup__description');
+  description
+    ? popupDescription.textContent = description
+    : popupDescription.remove();
+
+  const popupFeatures = popup.querySelector('.popup__features');
+  features
+    ? featuresList.forEach((feature) => {
+      if(!features.includes(feature)) {
+        popupFeatures.querySelector(`.popup__feature--${feature}`).remove();
+      }
+    })
+    : popupFeatures.remove();
 
   const popupPhotos = popup.querySelector('.popup__photos');
-  const popupPhotoEmpty = popupPhotos.querySelector('.popup__photo');
-  photos.forEach((photo) => {
-    const popupPhotoClone = popupPhotoEmpty.cloneNode();
-    popupPhotoClone.src = photo;
-    popupPhotos.appendChild(popupPhotoClone);
-  });
-  popupPhotoEmpty.remove();
+  if (photos) {
+    const popupPhotoEmpty = popupPhotos.querySelector('.popup__photo');
+    photos.forEach((photo) => {
+      const popupPhotoClone = popupPhotoEmpty.cloneNode();
+      popupPhotoClone.src = photo;
+      popupPhotos.appendChild(popupPhotoClone);
+    });
+    popupPhotoEmpty.remove();
+  } else {
+    popupPhotos.remove();
+  }
 
   return popup;
 };
