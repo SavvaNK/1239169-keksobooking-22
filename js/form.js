@@ -67,11 +67,6 @@ const syncCapacityWithRoomNumber = () => {
 roomNumberSelect.addEventListener('change', syncCapacityWithRoomNumber);
 capacitySelect.addEventListener('focus', syncCapacityWithRoomNumber);
 
-const titleInputLimits = {
-  MIN_LENGTH: 30,
-  MAX_LENGTH: 100,
-};
-
 const titleInput = adForm.querySelector('#title');
 
 const resetCustomValidityMessage = (element) => {
@@ -91,10 +86,24 @@ const setCustomValidityTooShortMessage = (element) => {
   }
 };
 
+const setCustomValidityTooLongMessage = (element) => {
+  const maxLength = element.maxLength;
+  if (element.validity.tooLong) {
+    element.setCustomValidity(`Должно быть максимум ${maxLength} знаков!`);
+  }
+};
+
+const setCustomValidityTypeMismatchMessage = (element) => {
+  if (element.validity.typeMismatch) {
+    element.setCustomValidity('Введён неверный тип данных!');
+  }
+};
+
 const onPriceInputInvalid = (evt) => {
   const el = evt.target;
   resetCustomValidityMessage(el);
   setCustomValidityValueMissingMessage(el);
+  setCustomValidityTypeMismatchMessage(el);
 };
 
 const onTitleInputInvalid = (evt) => {
@@ -102,6 +111,7 @@ const onTitleInputInvalid = (evt) => {
   resetCustomValidityMessage(el);
   setCustomValidityValueMissingMessage(el);
   setCustomValidityTooShortMessage(el);
+  setCustomValidityTooLongMessage(el);
 };
 
 titleInput.addEventListener('invalid', onTitleInputInvalid);
