@@ -1,6 +1,6 @@
 /* global L:readonly */
 
-import { generateAd } from './data/generate-ad.js';
+import { generateAd } from './mock-data/generate-ad.js';
 import { createPopup } from './popup.js';
 
 const disableElement = (el) => el.disabled = true;
@@ -73,7 +73,7 @@ mainMarker.on('drag', (evt) => {
 const ads = new Array(ADS_QUANTITY).fill(null).map(generateAd);
 
 ads.forEach((ad) => {
-  const [ lat, lng ] = ad.offer.address.split(', ');
+  const { x: lat, y: lng } = ad.location;
 
   const pinIcon = L.icon({
     iconUrl: 'img/pin.svg',
