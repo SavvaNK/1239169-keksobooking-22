@@ -29,7 +29,7 @@ const tokioCenter = Object.freeze({
 const ICON_SIZE = Object.freeze([48, 48]);
 const ICON_ANCHOR_SIZE = Object.freeze([24, 48]);
 const PRECISION_AFTER_POINT = 5;
-const MAP_ZOOM = 13;
+const MAP_ZOOM = 9;
 
 const map = L.map('map-canvas')
   .on('load', () => {
