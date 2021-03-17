@@ -1,8 +1,6 @@
 import './form.js';
 import './map.js';
+import { renderAds } from './map.js';
+import { getData } from './api.js';
 
-fetch('https://22.javascript.pages.academy/keksobooking/data')
-  .then((response) => response.json())
-  .then((ads) => {
-    console.log(ads);
-  });
+// getData((ads) => renderAds(ads));

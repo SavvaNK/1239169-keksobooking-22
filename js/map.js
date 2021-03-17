@@ -73,7 +73,7 @@ mainMarker.on('drag', (evt) => {
 const ads = new Array(ADS_QUANTITY).fill(null).map(generateAd);
 
 ads.forEach((ad) => {
-  const { x: lat, y: lng } = ad.location;
+  // const { x: lat, y: lng } = ad.location;
 
   const pinIcon = L.icon({
     iconUrl: 'img/pin.svg',
@@ -82,10 +82,7 @@ ads.forEach((ad) => {
   });
 
   const marker = L.marker(
-    {
-      lat,
-      lng,
-    },
+    ad.location,
     {
       icon: pinIcon,
     },
@@ -100,3 +97,33 @@ ads.forEach((ad) => {
       },
     );
 });
+
+const renderAds = (ads) => {
+  ads.forEach((ad) => {
+    // const {x: lat, y: lng} = ad.location;
+
+    const pinIcon = L.icon({
+      iconUrl: 'img/pin.svg',
+      iconSize: ICON_SIZE,
+      iconAnchor: ICON_ANCHOR_SIZE,
+    });
+
+    const marker = L.marker(
+      ad.location,
+      {
+        icon: pinIcon,
+      },
+    );
+
+    marker
+      .addTo(map)
+      .bindPopup(
+        createPopup(ad),
+        {
+          keepInView: true,
+        },
+      );
+  });
+};
+
+export { renderAds };
