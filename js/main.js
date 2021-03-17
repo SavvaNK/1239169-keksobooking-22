@@ -3,4 +3,4 @@ import './map.js';
 import { renderAds } from './map.js';
 import { getData } from './api.js';
 
-// getData((ads) => renderAds(ads));
+getData((ads) => renderAds(ads));
