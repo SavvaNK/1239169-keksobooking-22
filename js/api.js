@@ -8,7 +8,7 @@ const getData = (onSuccess, onFail) => {
         return response.json();
       }
 
-      onFail('Не удалось получить данные с сервера. Попробуйте ещё раз');
+      onFail(`Код ошибки: ${response.status}.\nОписание ошибки: ${response.statusText}.`);
     })
     .then((ads) => {
       onSuccess(ads);
@@ -35,4 +35,11 @@ const sendData = (onSuccess, onFail, body) => {
     });
 };
 
-export { getData, sendData };
+const onFailGetDataOverlay = (err) => {
+  const errorTemplate = document.querySelector('#get-data-error').content.querySelector('.get-data-error');
+  const errorClone = errorTemplate.cloneNode(true);
+  document.querySelector('body').appendChild(errorClone);
+  errorClone.querySelector('.get-data-error__message--details').textContent = err;
+};
+
+export { getData, sendData, onFailGetDataOverlay };
