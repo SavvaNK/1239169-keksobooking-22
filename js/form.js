@@ -9,6 +9,7 @@ const minPriceForType = {
 
 const priceInput = adForm.querySelector('#price');
 const typeInput = adForm.querySelector('#type');
+const resetButton = adForm.querySelector('.ad-form__reset');
 
 const setMinPrice = () => {
   const minPriceValue = minPriceForType[typeInput['value']];
@@ -116,3 +117,9 @@ const onTitleInputInvalid = (evt) => {
 
 titleInput.addEventListener('invalid', onTitleInputInvalid);
 priceInput.addEventListener('invalid', onPriceInputInvalid);
+
+const resetAdForm = () => {
+  adForm.reset();
+};
+
+resetButton.addEventListener('click', resetAdForm);
