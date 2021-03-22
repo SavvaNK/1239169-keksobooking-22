@@ -127,20 +127,15 @@ const resetAdForm = () => {
 resetButton.addEventListener('click', resetAdForm);
 
 // draft
-const setAdFormSubmit = (onSuccess) => {
+const setAdFormSubmit = (onSuccess, onFail) => {
   const onAdFormSubmit = (evt) => {
     evt.preventDefault();
 
     const formData = new FormData(evt.target);
 
-    fetch(
-      'https://22.javascript.pages.academy/keksobooking',
-      {
-        method: 'POST',
-        body: formData,
-      },
-    );
+    sendData(onSuccess, onFail, formData);
 
+    // check data to send
     for (const key of formData.keys()) {
       console.log(`${key}: `, formData.get(key));
     }
