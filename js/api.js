@@ -15,12 +15,12 @@ const getData = (onSuccess, onFail) => {
     });
 };
 
-const sendData = (onSuccess, onFail, body) => {
+const sendData = (onSuccess, onFail, data) => {
   fetch(
     serverSendUrl,
     {
       method: 'POST',
-      body,
+      body: data,
     },
   )
     .then((response) => {
@@ -36,10 +36,31 @@ const sendData = (onSuccess, onFail, body) => {
 };
 
 const onFailGetDataOverlay = (err) => {
-  const errorTemplate = document.querySelector('#get-data-error').content.querySelector('.get-data-error');
+  const errorTemplate = document
+    .querySelector('#get-data-error')
+    .content
+    .querySelector('.get-data-error');
+
   const errorClone = errorTemplate.cloneNode(true);
-  document.querySelector('body').appendChild(errorClone);
+
+  document
+    .querySelector('body')
+    .appendChild(errorClone);
+
   errorClone.querySelector('.get-data-error__message--details').textContent = err;
 };
 
-export { getData, sendData, onFailGetDataOverlay };
+const onSuccessSendDataOverlay = () => {
+  const errorTemplate = document
+    .querySelector('#success')
+    .content
+    .querySelector('.success');
+
+  const errorClone = errorTemplate.cloneNode(true);
+
+  document
+    .querySelector('body')
+    .appendChild(errorClone);
+};
+
+export { getData, sendData, onFailGetDataOverlay, onSuccessSendDataOverlay };

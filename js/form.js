@@ -1,3 +1,5 @@
+import { sendData } from './api.js';
+
 const adForm = document.querySelector('.ad-form');
 
 const minPriceForType = {
@@ -123,3 +125,28 @@ const resetAdForm = () => {
 };
 
 resetButton.addEventListener('click', resetAdForm);
+
+// draft
+const setAdFormSubmit = (onSuccess) => {
+  const onAdFormSubmit = (evt) => {
+    evt.preventDefault();
+
+    const formData = new FormData(evt.target);
+
+    fetch(
+      'https://22.javascript.pages.academy/keksobooking',
+      {
+        method: 'POST',
+        body: formData,
+      },
+    );
+
+    for (const key of formData.keys()) {
+      console.log(`${key}: `, formData.get(key));
+    }
+  };
+
+  adForm.addEventListener('submit', onAdFormSubmit);
+};
+
+export { setAdFormSubmit };
