@@ -1,5 +1,6 @@
 const serverSendUrl = 'https://22.javascript.pages.academy/keksobooking';
-const serverGetUrl = `${serverSendUrl}/data`;
+// const serverGetUrl = `${serverSendUrl}/data`;
+const serverGetUrl = 'https://22.javascript.pages.academy/keksobooking/data';
 
 const getData = (onSuccess, onFail) => {
   fetch(serverGetUrl)
@@ -15,13 +16,13 @@ const getData = (onSuccess, onFail) => {
     });
 };
 
-const sendData = (onSuccess, onFail, body) => {
+const sendData = (onSuccess, onFail, data) => {
   fetch(
     serverSendUrl,
     {
       method: 'POST',
-      body,
-      // body: data,
+      // body,
+      body: data,
     },
   )
     .then((response) => {

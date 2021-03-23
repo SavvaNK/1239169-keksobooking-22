@@ -1,4 +1,4 @@
-import { sendData } from './api.js';
+import { sendData, getData } from './api.js';
 
 const adForm = document.querySelector('.ad-form');
 
@@ -144,4 +144,34 @@ const setAdFormSubmit = (onSuccess, onFail) => {
   adForm.addEventListener('submit', onAdFormSubmit);
 };
 
-export { setAdFormSubmit };
+const onSuccessSendDataOverlay = () => {
+  const template = document
+    .querySelector('#success')
+    .content
+    .querySelector('.success');
+
+  const clone = template.cloneNode(true);
+
+  const parentElement = document.querySelector('body');
+
+  const removeClone = () => {
+    clone.remove();
+  };
+
+  const onParentElementKeydownEscape = (evt) => {
+    if (evt.key === 'Escape' || evt.key === 'Esc') {
+      evt.preventDefault();
+      removeClone();
+    }
+  };
+
+  parentElement
+    .appendChild(clone)
+    .addEventListener('click', removeClone);
+
+  parentElement.addEventListener('keydown', onParentElementKeydownEscape);
+
+  resetAdForm();
+};
+
+export { setAdFormSubmit, onSuccessSendDataOverlay };
