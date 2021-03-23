@@ -1,3 +1,5 @@
+import { sendData } from './api.js';
+
 const adForm = document.querySelector('.ad-form');
 
 const minPriceForType = {
@@ -9,6 +11,7 @@ const minPriceForType = {
 
 const priceInput = adForm.querySelector('#price');
 const typeInput = adForm.querySelector('#type');
+const resetButton = adForm.querySelector('.ad-form__reset');
 
 const setMinPrice = () => {
   const minPriceValue = minPriceForType[typeInput['value']];
@@ -116,3 +119,29 @@ const onTitleInputInvalid = (evt) => {
 
 titleInput.addEventListener('invalid', onTitleInputInvalid);
 priceInput.addEventListener('invalid', onPriceInputInvalid);
+
+const resetAdForm = () => {
+  adForm.reset();
+};
+
+resetButton.addEventListener('click', resetAdForm);
+
+// draft
+const setAdFormSubmit = (onSuccess, onFail) => {
+  const onAdFormSubmit = (evt) => {
+    evt.preventDefault();
+
+    const formData = new FormData(evt.target);
+
+    sendData(onSuccess, onFail, formData);
+
+    // check data to send
+    for (const key of formData.keys()) {
+      console.log(`${key}: `, formData.get(key));
+    }
+  };
+
+  adForm.addEventListener('submit', onAdFormSubmit);
+};
+
+export { setAdFormSubmit };

@@ -922,11 +922,12 @@ fieldset {
  */
 
 .success,
-.error {
+.error,
+.get-data-error {
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 2;
+  z-index: 400;
 
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
@@ -944,7 +945,9 @@ fieldset {
 }
 
 .success__message,
-.error__message {
+.error__message,
+.get-data-error__message,
+.get-data-error__message--details {
   position: relative;
 
   color: #ffffff;

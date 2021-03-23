@@ -1,6 +1,5 @@
 /* global L:readonly */
 
-import { generateAd } from './data/generate-ad.js';
 import { createPopup } from './popup.js';
 
 const disableElement = (el) => el.disabled = true;
@@ -29,9 +28,8 @@ const tokioCenter = Object.freeze({
 
 const ICON_SIZE = Object.freeze([48, 48]);
 const ICON_ANCHOR_SIZE = Object.freeze([24, 48]);
-const ADS_QUANTITY = 10;
 const PRECISION_AFTER_POINT = 5;
-const MAP_ZOOM = 13;
+const MAP_ZOOM = 9;
 
 const map = L.map('map-canvas')
   .on('load', () => {
@@ -70,33 +68,30 @@ mainMarker.on('drag', (evt) => {
   address.value = `${lat.toFixed(PRECISION_AFTER_POINT)}, ${lng.toFixed(PRECISION_AFTER_POINT)}`;
 });
 
-const ads = new Array(ADS_QUANTITY).fill(null).map(generateAd);
+const renderAds = (ads) => {
+  ads.forEach((ad) => {
+    const pinIcon = L.icon({
+      iconUrl: 'img/pin.svg',
+      iconSize: ICON_SIZE,
+      iconAnchor: ICON_ANCHOR_SIZE,
+    });
 
-ads.forEach((ad) => {
-  const [ lat, lng ] = ad.offer.address.split(', ');
-
-  const pinIcon = L.icon({
-    iconUrl: 'img/pin.svg',
-    iconSize: ICON_SIZE,
-    iconAnchor: ICON_ANCHOR_SIZE,
-  });
-
-  const marker = L.marker(
-    {
-      lat,
-      lng,
-    },
-    {
-      icon: pinIcon,
-    },
-  );
-
-  marker
-    .addTo(map)
-    .bindPopup(
-      createPopup(ad),
+    const marker = L.marker(
+      ad.location,
       {
-        keepInView: true,
+        icon: pinIcon,
       },
     );
-});
+
+    marker
+      .addTo(map)
+      .bindPopup(
+        createPopup(ad),
+        {
+          keepInView: true,
+        },
+      );
+  });
+};
+
+export { renderAds };
