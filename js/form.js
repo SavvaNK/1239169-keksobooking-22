@@ -139,7 +139,7 @@ const setAdFormSubmit = (onSuccess, onFail) => {
   //   for (const key of formData.keys()) {
   //     console.log(`${key}: `, formData.get(key));
   //   }
-  // };
+  };
 
   adForm.addEventListener('submit', onAdFormSubmit);
 };
