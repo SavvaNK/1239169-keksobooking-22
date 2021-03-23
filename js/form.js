@@ -158,17 +158,26 @@ const onSuccessSendDataOverlay = () => {
     clone.remove();
   };
 
+  const onParentElementClick = () => {
+    removeClone();
+
+    parentElement.removeEventListener('click', onParentElementClick);
+    parentElement.removeEventListener('keydown', onParentElementKeydownEscape);
+  };
+
   const onParentElementKeydownEscape = (evt) => {
     if (evt.key === 'Escape' || evt.key === 'Esc') {
       evt.preventDefault();
       removeClone();
     }
+
+    parentElement.removeEventListener('click', onParentElementClick);
+    parentElement.removeEventListener('keydown', onParentElementKeydownEscape);
   };
 
-  parentElement
-    .appendChild(clone)
-    .addEventListener('click', removeClone);
+  parentElement.appendChild(clone);
 
+  parentElement.addEventListener('click', onParentElementClick);
   parentElement.addEventListener('keydown', onParentElementKeydownEscape);
 
   resetAdForm();
