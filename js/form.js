@@ -158,11 +158,14 @@ const onSuccessSendDataOverlay = () => {
     clone.remove();
   };
 
-  const onParentElementClick = () => {
-    removeClone();
-
+  function removeParentEventListeners() {
     parentElement.removeEventListener('click', onParentElementClick);
     parentElement.removeEventListener('keydown', onParentElementKeydownEscape);
+  }
+
+  const onParentElementClick = () => {
+    removeClone();
+    removeParentEventListeners();
   };
 
   const onParentElementKeydownEscape = (evt) => {
@@ -170,13 +173,10 @@ const onSuccessSendDataOverlay = () => {
       evt.preventDefault();
       removeClone();
     }
-
-    parentElement.removeEventListener('click', onParentElementClick);
-    parentElement.removeEventListener('keydown', onParentElementKeydownEscape);
+    removeParentEventListeners();
   };
 
   parentElement.appendChild(clone);
-
   parentElement.addEventListener('click', onParentElementClick);
   parentElement.addEventListener('keydown', onParentElementKeydownEscape);
 
