@@ -2,15 +2,15 @@ import { generateAd } from './mock-data/generate-ad.js';
 
 const ads = new Array(10).fill(null).map(generateAd);
 
-const typeFn = (houseType) => (
+const filterType = (houseType) => (
   ({ offer: { type } }) => houseType === 'any' ? true : houseType === type
 );
 
-const roomsFn = (houseRooms) => (
+const filterRooms = (houseRooms) => (
   ({ offer: { rooms } }) => houseRooms === 'any' ? true : parseInt(houseRooms) === rooms
 );
 
-const guestsFn = (houseGuests) => (
+const filterGuests = (houseGuests) => (
   ({ offer: { guests } }) => houseGuests === 'any' ? true : parseInt(houseGuests) === guests
 );
 
@@ -23,15 +23,15 @@ const priceList = {
   'high':(price) => price >= highPrice,
 };
 
-const priceFn = (housePrice) => (
+const filterPrice = (housePrice) => (
   ({ offer: { price } }) => housePrice === 'any' ? true : priceList[housePrice](price)
 );
 
 console.log(
-  ads.filter( typeFn('any')).filter(priceFn('middle')).filter(roomsFn('any')).filter(guestsFn('any')),
+  ads.filter( filterType('any')).filter(filterPrice('any')).filter(filterRooms('any')).filter(filterGuests('any')),
   // ads.filter( typeFn('any')).length,
   '--------------------------------\n',
-  ads.filter( typeFn('any')).filter(priceFn('middle')).filter(roomsFn('any')).filter(guestsFn('any')).length,
+  ads.filter( filterType('any')).filter(filterPrice('any')).filter(filterRooms('any')).filter(filterGuests('any')).length,
   '--------------------------------\n',
   ads.length,
 );
