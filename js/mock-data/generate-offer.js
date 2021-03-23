@@ -22,7 +22,7 @@ const generateOffer = () => ({
   address: 'some address по маске {{location.x}}, {{location.y}}',
 
   //   price, число — стоимость. Любое положительное число.
-  price: getRandomFloat(100, 1000),
+  price: getRandomFloat(100, 60000),
 
   //   type, строка — одно из четырёх фиксированных значений: palace, flat, house или bungalow.
   type: getUniqRandomItemsFromArray(typeList),
