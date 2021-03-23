@@ -1,8 +1,8 @@
 import './form.js';
 import './map.js';
 import { renderAds } from './map.js';
-import { getData, onFailGetDataOverlay, onFailSendDataOverlay } from './api.js';
-import { setAdFormSubmit, onSuccessSendDataOverlay } from './form.js';
+import { getData } from './api.js';
+import { setAdFormSubmit, onSuccessSendDataOverlay, onFailGetDataOverlay, onFailSendDataOverlay } from './form.js';
 
 getData(renderAds, onFailGetDataOverlay);
 

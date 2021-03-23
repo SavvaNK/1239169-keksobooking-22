@@ -144,6 +144,7 @@ const setAdFormSubmit = (onSuccess, onFail) => {
   adForm.addEventListener('submit', onAdFormSubmit);
 };
 
+// form overlays
 const onSuccessSendDataOverlay = () => {
   const template = document
     .querySelector('#success')
@@ -172,4 +173,47 @@ const onSuccessSendDataOverlay = () => {
   resetAdForm();
 };
 
-export { setAdFormSubmit, onSuccessSendDataOverlay };
+const onFailGetDataOverlay = (err) => {
+  const template = document
+    .querySelector('#get-data-error')
+    .content
+    .querySelector('.get-data-error');
+
+  const clone = template.cloneNode(true);
+
+  clone
+    .querySelector('.get-data-error__message--details')
+    .textContent = err;
+
+  const parentElement = document.querySelector('body');
+
+  const removeClone = () => {
+    clone.remove();
+  };
+
+  const onParentElementKeydownEscape = (evt) => {
+    if (evt.key === 'Escape' || evt.key === 'Esc') {
+      evt.preventDefault();
+      removeClone();
+    }
+  };
+
+  parentElement.appendChild(clone);
+  parentElement.addEventListener('click', removeClone, {once: true});
+  parentElement.addEventListener('keydown', onParentElementKeydownEscape, {once: true});
+};
+
+const onFailSendDataOverlay = () => {
+  const template = document
+    .querySelector('#error')
+    .content
+    .querySelector('.error');
+
+  const clone = template.cloneNode(true);
+
+  document
+    .querySelector('body')
+    .appendChild(clone);
+};
+
+export { setAdFormSubmit, onSuccessSendDataOverlay, onFailGetDataOverlay, onFailSendDataOverlay };

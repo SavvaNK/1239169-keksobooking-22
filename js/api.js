@@ -1,6 +1,6 @@
 const serverSendUrl = 'https://22.javascript.pages.academy/keksobooking';
 // const serverGetUrl = `${serverSendUrl}/data`;
-const serverGetUrl = 'https://22.javascript.pages.academy/keksobooking/data';
+const serverGetUrl = 'https://22.javascript.pages.academy/keksobooking/dat';
 
 const getData = (onSuccess, onFail) => {
   fetch(serverGetUrl)
@@ -37,51 +37,4 @@ const sendData = (onSuccess, onFail, data) => {
     });
 };
 
-const onFailGetDataOverlay = (err) => {
-  const template = document
-    .querySelector('#get-data-error')
-    .content
-    .querySelector('.get-data-error');
-
-  const clone = template.cloneNode(true);
-
-  document
-    .querySelector('body')
-    .appendChild(clone);
-
-  clone.querySelector('.get-data-error__message--details').textContent = err;
-};
-
-const onSuccessSendDataOverlay = () => {
-  const template = document
-    .querySelector('#success')
-    .content
-    .querySelector('.success');
-
-  const clone = template.cloneNode(true);
-
-  document
-    .querySelector('body')
-    .appendChild(clone);
-
-  document
-    .querySelector('body')
-    .addEventListener('click', () => {
-      clone.remove();
-    });
-};
-
-const onFailSendDataOverlay = () => {
-  const template = document
-    .querySelector('#error')
-    .content
-    .querySelector('.error');
-
-  const clone = template.cloneNode(true);
-
-  document
-    .querySelector('body')
-    .appendChild(clone);
-};
-
-export { getData, sendData, onFailGetDataOverlay, onSuccessSendDataOverlay, onFailSendDataOverlay };
+export { getData, sendData };
