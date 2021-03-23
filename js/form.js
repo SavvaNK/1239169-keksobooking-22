@@ -134,11 +134,6 @@ const setAdFormSubmit = (onSuccess, onFail) => {
     const formData = new FormData(evt.target);
 
     sendData(onSuccess, onFail, formData);
-
-  //   // check data to send
-  //   for (const key of formData.keys()) {
-  //     console.log(`${key}: `, formData.get(key));
-  //   }
   };
 
   adForm.addEventListener('submit', onAdFormSubmit);
