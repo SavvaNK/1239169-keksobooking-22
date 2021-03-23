@@ -1,4 +1,5 @@
 import { sendData, getData } from './api.js';
+import { renderAds } from './map.js';
 
 const adForm = document.querySelector('.ad-form');
 
@@ -126,7 +127,6 @@ const resetAdForm = () => {
 
 resetButton.addEventListener('click', resetAdForm);
 
-// draft
 const setAdFormSubmit = (onSuccess, onFail) => {
   const onAdFormSubmit = (evt) => {
     evt.preventDefault();
@@ -135,11 +135,11 @@ const setAdFormSubmit = (onSuccess, onFail) => {
 
     sendData(onSuccess, onFail, formData);
 
-    // check data to send
-    for (const key of formData.keys()) {
-      console.log(`${key}: `, formData.get(key));
-    }
-  };
+  //   // check data to send
+  //   for (const key of formData.keys()) {
+  //     console.log(`${key}: `, formData.get(key));
+  //   }
+  // };
 
   adForm.addEventListener('submit', onAdFormSubmit);
 };
@@ -211,9 +211,29 @@ const onFailSendDataOverlay = () => {
 
   const clone = template.cloneNode(true);
 
-  document
-    .querySelector('body')
-    .appendChild(clone);
+  const button = clone.querySelector('.error__button');
+
+  const parentElement = document.querySelector('body');
+
+  parentElement.appendChild(clone);
+
+  const removeClone = () => {
+    clone.remove();
+  };
+
+  const onParentElementKeydownEscape = (evt) => {
+    if (evt.key === 'Escape' || evt.key === 'Esc') {
+      evt.preventDefault();
+      removeClone();
+    }
+  };
+
+  parentElement.addEventListener('click', removeClone, {once: true});
+  parentElement.addEventListener('keydown', onParentElementKeydownEscape, {once: true});
+
+  button.addEventListener('click', removeClone);
 };
 
-export { setAdFormSubmit, onSuccessSendDataOverlay, onFailGetDataOverlay, onFailSendDataOverlay };
+getData(renderAds, onFailGetDataOverlay);
+
+setAdFormSubmit(onSuccessSendDataOverlay, onFailSendDataOverlay);
