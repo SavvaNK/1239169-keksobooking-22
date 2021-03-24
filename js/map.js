@@ -96,3 +96,4 @@ const renderAds = (ads) => {
 };
 
 export { renderAds };
+

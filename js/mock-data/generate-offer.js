@@ -50,3 +50,4 @@ const generateOffer = () => ({
 });
 
 export { generateOffer };
+

@@ -232,3 +232,4 @@ const onFailSendDataOverlay = () => {
 getData(renderAds, onFailGetDataOverlay);
 
 setAdFormSubmit(onSuccessSendDataOverlay, onFailSendDataOverlay);
+
