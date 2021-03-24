@@ -28,12 +28,18 @@ const filterPrice = (housePrice) => (
 );
 
 const mapFilters = document.querySelector('.map__filters');
+// eslint-disable-next-line no-unused-vars
 const typeFilterInput = mapFilters.querySelector('.housing-type');
+// eslint-disable-next-line no-unused-vars
 const priceFilterInput = mapFilters.querySelector('.housing-price');
+// eslint-disable-next-line no-unused-vars
 const roomsFilterInput = mapFilters.querySelector('.housing-rooms');
+// eslint-disable-next-line no-unused-vars
 const guestsFilterInput = mapFilters.querySelector('.housing-guests');
+// eslint-disable-next-line no-unused-vars
 const featuresFilterCheckboxes = mapFilters.querySelectorAll('.map__checkbox');
 
+// eslint-disable-next-line no-console
 console.log(
   ads.filter( filterType('any')).filter(filterPrice('any')).filter(filterRooms('any')).filter(filterGuests('any')),
   // ads.filter( typeFn('any')).length,
@@ -42,4 +48,3 @@ console.log(
   '--------------------------------\n',
   ads.length,
 );
-

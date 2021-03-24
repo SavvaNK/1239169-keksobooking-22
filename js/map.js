@@ -70,7 +70,6 @@ mainMarker.on('drag', (evt) => {
 
 const renderAds = (ads) => {
   ads.forEach((ad) => {
-    console.log(ad);
     const pinIcon = L.icon({
       iconUrl: 'img/pin.svg',
       iconSize: ICON_SIZE,
@@ -96,4 +95,3 @@ const renderAds = (ads) => {
 };
 
 export { renderAds };
-

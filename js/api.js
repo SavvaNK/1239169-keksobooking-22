@@ -37,4 +37,3 @@ const sendData = (onSuccess, onFail, data) => {
 };
 
 export { getData, sendData };
-
