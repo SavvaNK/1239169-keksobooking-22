@@ -22,16 +22,16 @@ const generateOffer = () => ({
   address: 'some address по маске {{location.x}}, {{location.y}}',
 
   //   price, число — стоимость. Любое положительное число.
-  price: getRandomFloat(100, 1000),
+  price: getRandomFloat(100, 60000),
 
   //   type, строка — одно из четырёх фиксированных значений: palace, flat, house или bungalow.
   type: getUniqRandomItemsFromArray(typeList),
 
   //   rooms, число — количество комнат. Любое положительное число.
-  rooms: getRandomInt(1, 10),
+  rooms: getRandomInt(0, 100),
 
   //   guests, число — количество гостей, которое можно разместить. Любое положительное число.
-  guests: getRandomInt(1, 20),
+  guests: getRandomInt(0, 2),
 
   //   checkin, строка — одно из трёх фиксированных значений: 12:00, 13:00 или 14:00.
   checkin: getUniqRandomItemsFromArray(checkInOutTimes),
