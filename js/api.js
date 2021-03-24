@@ -15,13 +15,13 @@ const getData = (onSuccess, onFail) => {
     });
 };
 
-const sendData = (onSuccess, onFail, body) => {
+const sendData = (onSuccess, onFail, data) => {
   fetch(
     serverSendUrl,
     {
       method: 'POST',
-      body,
-      // body: data,
+      // body,
+      body: data,
     },
   )
     .then((response) => {
@@ -36,51 +36,4 @@ const sendData = (onSuccess, onFail, body) => {
     });
 };
 
-const onFailGetDataOverlay = (err) => {
-  const template = document
-    .querySelector('#get-data-error')
-    .content
-    .querySelector('.get-data-error');
-
-  const clone = template.cloneNode(true);
-
-  document
-    .querySelector('body')
-    .appendChild(clone);
-
-  clone.querySelector('.get-data-error__message--details').textContent = err;
-};
-
-const onSuccessSendDataOverlay = () => {
-  const template = document
-    .querySelector('#success')
-    .content
-    .querySelector('.success');
-
-  const clone = template.cloneNode(true);
-
-  document
-    .querySelector('body')
-    .appendChild(clone);
-
-  document
-    .querySelector('body')
-    .addEventListener('click', () => {
-      clone.remove();
-    });
-};
-
-const onFailSendDataOverlay = () => {
-  const template = document
-    .querySelector('#error')
-    .content
-    .querySelector('.error');
-
-  const clone = template.cloneNode(true);
-
-  document
-    .querySelector('body')
-    .appendChild(clone);
-};
-
-export { getData, sendData, onFailGetDataOverlay, onSuccessSendDataOverlay, onFailSendDataOverlay };
+export { getData, sendData };
