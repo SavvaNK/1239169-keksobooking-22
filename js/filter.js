@@ -27,6 +27,13 @@ const filterPrice = (housePrice) => (
   ({ offer: { price } }) => housePrice === 'any' ? true : priceList[housePrice](price)
 );
 
+const mapFilters = document.querySelector('.map__filters');
+const typeFilterInput = mapFilters.querySelector('.housing-type');
+const priceFilterInput = mapFilters.querySelector('.housing-price');
+const roomsFilterInput = mapFilters.querySelector('.housing-rooms');
+const guestsFilterInput = mapFilters.querySelector('.housing-guests');
+const featuresFilterCheckboxes = mapFilters.querySelectorAll('.map__checkbox');
+
 console.log(
   ads.filter( filterType('any')).filter(filterPrice('any')).filter(filterRooms('any')).filter(filterGuests('any')),
   // ads.filter( typeFn('any')).length,
