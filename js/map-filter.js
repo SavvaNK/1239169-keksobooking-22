@@ -43,7 +43,7 @@ const guestsFilterInput = mapFilters.querySelector('.housing-guests');
 // eslint-disable-next-line no-unused-vars
 const featuresFilterCheckboxes = mapFilters.querySelectorAll('.map__checkbox');
 
-const returnCheckedFeaturesArray = () => {
+const reduceCheckedFeatures = () => {
   const result = [];
   featuresFilterCheckboxes.forEach((el) => el.checked && result.push(el.value));
   return result;
@@ -58,5 +58,5 @@ console.log(
   '--------------------------------\n',
   ads.length,
   JSON.stringify(ads.filter( filterType('any')).filter(filterPrice('middle')).filter(filterRooms('any')).filter(filterGuests('any')).filter(filterFeatures(['washer', 'elevator', 'wifi']))),
-  returnCheckedFeaturesArray(),
+  reduceCheckedFeatures(),
 );
