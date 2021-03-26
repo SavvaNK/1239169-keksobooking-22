@@ -72,6 +72,7 @@ let renderedMinorMarkers = [];
 
 const renderAds = (ads) => {
   renderedMinorMarkers.forEach(marker => marker.remove());
+  renderedMinorMarkers = [];
 
   ads.forEach((ad) => {
     const pinIcon = L.icon({

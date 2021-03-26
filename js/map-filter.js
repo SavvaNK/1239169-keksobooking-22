@@ -53,7 +53,7 @@ const processingAds = (ads) => (
     .filter(filterGuests(guestsFilterInput.value))
     .filter(filterPrice(priceFilterInput.value))
     .filter(filterFeatures(reduceCheckedCheckboxesValue(featuresFilterCheckboxes)))
-    .slice(0, MAX_ADS_NUMBER_TO_RENDER - 1))
+    .slice(0, MAX_ADS_NUMBER_TO_RENDER))
 );
 
 const getAds  = () => getData(processingAds, onFailGetDataOverlay);
