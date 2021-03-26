@@ -57,9 +57,9 @@ const processingAds = (ads) => (
     .slice(0, MAX_ADS_NUMBER_TO_RENDER))
 );
 
-const getAds  = () => getData(processingAds, onFailGetDataOverlay);
+const getAds = () => getData(processingAds, onFailGetDataOverlay);
 
-const onFilterElementChange = debounce(getAds, 500);
+const onFilterElementChange = debounce(getAds);
 
 mapFilters.addEventListener('change', onFilterElementChange);
 
