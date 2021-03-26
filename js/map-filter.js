@@ -1,4 +1,7 @@
 import { generateAd } from './mock-data/generate-ad.js';
+import { renderAds } from './map.js';
+import { onFailGetDataOverlay } from './form.js';
+import { getData } from './api.js';
 
 const ads = new Array(5).fill(null).map(generateAd);
 
@@ -48,6 +51,8 @@ const reduceCheckedCheckboxesValue = (checkboxes) => {
   checkboxes.forEach((el) => el.checked && result.push(el.value));
   return result;
 };
+
+getData(renderAds, onFailGetDataOverlay);
 
 // eslint-disable-next-line no-console
 console.log(
