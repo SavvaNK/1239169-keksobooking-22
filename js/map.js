@@ -68,7 +68,11 @@ mainMarker.on('drag', (evt) => {
   address.value = `${lat.toFixed(PRECISION_AFTER_POINT)}, ${lng.toFixed(PRECISION_AFTER_POINT)}`;
 });
 
+const adsMarkersLayer = L.layerGroup().addTo(map);
+
 const renderAds = (ads) => {
+  adsMarkersLayer.clearLayers();
+
   ads.forEach((ad) => {
     const pinIcon = L.icon({
       iconUrl: 'img/pin.svg',
@@ -84,7 +88,7 @@ const renderAds = (ads) => {
     );
 
     marker
-      .addTo(map)
+      .addTo(adsMarkersLayer)
       .bindPopup(
         createPopup(ad),
         {
