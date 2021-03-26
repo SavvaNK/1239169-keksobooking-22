@@ -1,6 +1,7 @@
 import { renderAds } from './map.js';
 import { onFailGetDataOverlay } from './form.js';
 import { getData } from './api.js';
+import { debounce } from './utils/index.js';
 
 const MAX_ADS_NUMBER_TO_RENDER = 10;
 
@@ -58,13 +59,8 @@ const processingAds = (ads) => (
 
 const getAds  = () => getData(processingAds, onFailGetDataOverlay);
 
-const onFilterElementChange = getAds;
+const onFilterElementChange = debounce(getAds, 500);
 
 mapFilters.addEventListener('change', onFilterElementChange);
 
 getAds();
-
-// eslint-disable-next-line no-console
-console.log(
-  'Hi',
-);
