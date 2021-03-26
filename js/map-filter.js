@@ -22,7 +22,7 @@ const highPrice = 50000;
 const priceDict = {
   'middle': (price) => price >= lowPrice && price <= highPrice,
   'low': (price) => price <= lowPrice,
-  'high':(price) => price >= highPrice,
+  'high': (price) => price >= highPrice,
 };
 
 const filterPrice = (housePrice) => (
@@ -56,7 +56,13 @@ const processingAds = (ads) => (
     .slice(0, MAX_ADS_NUMBER_TO_RENDER - 1))
 );
 
-getData(processingAds, onFailGetDataOverlay);
+const getAds  = () => getData(processingAds, onFailGetDataOverlay);
+
+const onFilterElementChange = getAds;
+
+mapFilters.addEventListener('change', onFilterElementChange);
+
+getAds();
 
 // eslint-disable-next-line no-console
 console.log(

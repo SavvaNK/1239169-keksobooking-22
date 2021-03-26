@@ -68,7 +68,11 @@ mainMarker.on('drag', (evt) => {
   address.value = `${lat.toFixed(PRECISION_AFTER_POINT)}, ${lng.toFixed(PRECISION_AFTER_POINT)}`;
 });
 
+let renderedMinorMarkers = [];
+
 const renderAds = (ads) => {
+  renderedMinorMarkers.forEach(marker => marker.remove());
+
   ads.forEach((ad) => {
     const pinIcon = L.icon({
       iconUrl: 'img/pin.svg',
@@ -91,6 +95,8 @@ const renderAds = (ads) => {
           keepInView: true,
         },
       );
+
+    renderedMinorMarkers.push(marker);
   });
 };
 
