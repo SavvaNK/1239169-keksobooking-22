@@ -1,9 +1,8 @@
-import { generateAd } from './mock-data/generate-ad.js';
 import { renderAds } from './map.js';
 import { onFailGetDataOverlay } from './form.js';
 import { getData } from './api.js';
 
-const ads = new Array(5).fill(null).map(generateAd);
+const MAX_ADS_NUMBER_TO_RENDER = 10;
 
 const filterType = (houseType) => (
   ({ offer: { type } }) => houseType === 'any' ? true : houseType === type
@@ -34,34 +33,32 @@ const filterFeatures = (houseFeatures) => (
   ({ offer: { features } }) => houseFeatures.length === 0 ? true : features.includes(...houseFeatures)
 );
 
-const mapFilters = document.querySelector('.map__filters');
-// eslint-disable-next-line no-unused-vars
-const typeFilterInput = mapFilters.querySelector('.housing-type');
-// eslint-disable-next-line no-unused-vars
-const priceFilterInput = mapFilters.querySelector('.housing-price');
-// eslint-disable-next-line no-unused-vars
-const roomsFilterInput = mapFilters.querySelector('.housing-rooms');
-// eslint-disable-next-line no-unused-vars
-const guestsFilterInput = mapFilters.querySelector('.housing-guests');
-// eslint-disable-next-line no-unused-vars
-const featuresFilterCheckboxes = mapFilters.querySelectorAll('.map__checkbox');
-
 const reduceCheckedCheckboxesValue = (checkboxes) => {
   const result = [];
   checkboxes.forEach((el) => el.checked && result.push(el.value));
   return result;
 };
 
-getData(renderAds, onFailGetDataOverlay);
+const mapFilters = document.querySelector('.map__filters');
+const typeFilterInput = mapFilters.querySelector('#housing-type');
+const priceFilterInput = mapFilters.querySelector('#housing-price');
+const roomsFilterInput = mapFilters.querySelector('#housing-rooms');
+const guestsFilterInput = mapFilters.querySelector('#housing-guests');
+const featuresFilterCheckboxes = mapFilters.querySelectorAll('.map__checkbox');
+
+const processingAds = (ads) => (
+  renderAds(ads
+    .filter(filterType(typeFilterInput.value))
+    .filter(filterRooms(roomsFilterInput.value))
+    .filter(filterGuests(guestsFilterInput.value))
+    .filter(filterPrice(priceFilterInput.value))
+    .filter(filterFeatures(reduceCheckedCheckboxesValue(featuresFilterCheckboxes)))
+    .slice(0, MAX_ADS_NUMBER_TO_RENDER - 1))
+);
+
+getData(processingAds, onFailGetDataOverlay);
 
 // eslint-disable-next-line no-console
 console.log(
-  ads.filter( filterType('any')).filter(filterPrice('middle')).filter(filterRooms('any')).filter(filterGuests('any')).filter(filterFeatures(['washer', 'elevator', 'wifi'])),
-  // ads.filter( typeFn('any')).length,
-  '--------------------------------\n',
-  ads.filter( filterType('any')).filter(filterPrice('middle')).filter(filterRooms('any')).filter(filterGuests('any')).filter(filterFeatures(['washer', 'elevator', 'wifi'])).length,
-  '--------------------------------\n',
-  ads.length,
-  JSON.stringify(ads.filter( filterType('any')).filter(filterPrice('middle')).filter(filterRooms('any')).filter(filterGuests('any')).filter(filterFeatures(['washer', 'elevator', 'wifi']))),
-  reduceCheckedCheckboxesValue(featuresFilterCheckboxes),
+  'Hi',
 );
