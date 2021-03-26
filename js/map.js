@@ -68,11 +68,10 @@ mainMarker.on('drag', (evt) => {
   address.value = `${lat.toFixed(PRECISION_AFTER_POINT)}, ${lng.toFixed(PRECISION_AFTER_POINT)}`;
 });
 
-let renderedMinorMarkers = [];
+const adsMarkersLayer = L.layerGroup().addTo(map);
 
 const renderAds = (ads) => {
-  renderedMinorMarkers.forEach(marker => marker.remove());
-  renderedMinorMarkers = [];
+  adsMarkersLayer.clearLayers();
 
   ads.forEach((ad) => {
     const pinIcon = L.icon({
@@ -89,15 +88,13 @@ const renderAds = (ads) => {
     );
 
     marker
-      .addTo(map)
+      .addTo(adsMarkersLayer)
       .bindPopup(
         createPopup(ad),
         {
           keepInView: true,
         },
       );
-
-    renderedMinorMarkers.push(marker);
   });
 };
 
