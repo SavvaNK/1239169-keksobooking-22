@@ -1,5 +1,4 @@
-import { sendData, getData } from './api.js';
-import { renderAds } from './map.js';
+import { sendData } from './api.js';
 
 const adForm = document.querySelector('.ad-form');
 
@@ -229,6 +228,6 @@ const onFailSendDataOverlay = () => {
   button.addEventListener('click', removeClone);
 };
 
-getData(renderAds, onFailGetDataOverlay);
-
 setAdFormSubmit(onSuccessSendDataOverlay, onFailSendDataOverlay);
+
+export { onFailGetDataOverlay };
