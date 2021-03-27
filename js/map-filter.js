@@ -63,4 +63,4 @@ const onFilterElementChange = debounce(getAds);
 
 mapFilters.addEventListener('change', onFilterElementChange);
 
-getAds();
+export { getAds };

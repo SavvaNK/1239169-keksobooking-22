@@ -1,6 +1,7 @@
 /* global L:readonly */
 
 import { createPopup } from './popup.js';
+import { getAds } from './map-filter.js';
 
 const disableElement = (el) => el.disabled = true;
 const enableElement = (el) => el.disabled = false;
@@ -35,6 +36,7 @@ const map = L.map('map-canvas')
   .on('load', () => {
     enableForm('.ad-form', 'fieldset');
     enableForm('.map__filters', 'fieldset', 'select');
+    getAds();
   })
   .setView(tokioCenter, MAP_ZOOM);
 
