@@ -38,9 +38,10 @@ const syncTimeOut = () => {
 };
 
 const onTimeInInputChange = syncTimeOut;
+const onTimeOutInputChange = syncTimeIn;
 
 timeInInput.addEventListener('change', onTimeInInputChange);
-timeOutInput.addEventListener('change', syncTimeIn);
+timeOutInput.addEventListener('change', onTimeOutInputChange);
 
 const getArrayOfRange = (start, end, step = 1) => {
   const result = [];
