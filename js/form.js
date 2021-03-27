@@ -192,13 +192,13 @@ const onSuccessSendDataOverlay = () => {
   resetForm();
 };
 
-const onFailGetDataOverlay = (err) => {
-  const template = document
-    .querySelector('#get-data-error')
-    .content
-    .querySelector('.get-data-error');
+const dataErrorTemplate = document
+  .querySelector('#get-data-error')
+  .content
+  .querySelector('.get-data-error');
 
-  const clone = template.cloneNode(true);
+const onFailGetDataOverlay = (err) => {
+  const clone = dataErrorTemplate.cloneNode(true);
 
   clone
     .querySelector('.get-data-error__message--details')
