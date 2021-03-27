@@ -147,7 +147,7 @@ const onSuccessSendDataOverlay = () => {
 
   const clone = template.cloneNode(true);
 
-  const parentElement = document.querySelector('body');
+  const parentElement = document.querySelector('main');
 
   const removeClone = () => {
     clone.remove();
@@ -179,7 +179,7 @@ const onFailGetDataOverlay = (err) => {
     .querySelector('.get-data-error__message--details')
     .textContent = err;
 
-  const parentElement = document.querySelector('body');
+  const parentElement = document.querySelector('main');
 
   const removeClone = () => {
     clone.remove();
@@ -207,7 +207,7 @@ const onFailSendDataOverlay = () => {
 
   const button = clone.querySelector('.error__button');
 
-  const parentElement = document.querySelector('body');
+  const parentElement = document.querySelector('main');
 
   parentElement.appendChild(clone);
 
