@@ -224,13 +224,13 @@ const onFailGetDataOverlay = (err) => {
   parentElement.addEventListener('keydown', onParentElementKeydownEscape, {once: true});
 };
 
-const onFailSendDataOverlay = () => {
-  const template = document
-    .querySelector('#error')
-    .content
-    .querySelector('.error');
+const errorTemplate = document
+  .querySelector('#error')
+  .content
+  .querySelector('.error');
 
-  const clone = template.cloneNode(true);
+const onFailSendDataOverlay = () => {
+  const clone = errorTemplate.cloneNode(true);
 
   const button = clone.querySelector('.error__button');
 
