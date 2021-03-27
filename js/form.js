@@ -175,7 +175,10 @@ const onSuccessSendDataOverlay = () => {
   };
 
   parentElement.appendChild(clone);
-  parentElement.addEventListener('click', removeClone, {once: true});
+
+  const onParentElementClick = removeClone;
+
+  parentElement.addEventListener('click', onParentElementClick, {once: true});
   parentElement.addEventListener('keydown', onParentElementKeydownEscape, {once: true});
 
   resetForm();
@@ -206,8 +209,10 @@ const onFailGetDataOverlay = (err) => {
     }
   };
 
+  const onParentElementClick = removeClone;
+
   parentElement.appendChild(clone);
-  parentElement.addEventListener('click', removeClone, {once: true});
+  parentElement.addEventListener('click', onParentElementClick, {once: true});
   parentElement.addEventListener('keydown', onParentElementKeydownEscape, {once: true});
 };
 
@@ -236,10 +241,14 @@ const onFailSendDataOverlay = () => {
     }
   };
 
-  parentElement.addEventListener('click', removeClone, {once: true});
+  const onParentElementClick = removeClone;
+
+  parentElement.addEventListener('click', onParentElementClick, {once: true});
   parentElement.addEventListener('keydown', onParentElementKeydownEscape, {once: true});
 
-  button.addEventListener('click', removeClone);
+  const onButtonClick = removeClone;
+
+  button.addEventListener('click', onButtonClick);
 };
 
 setAdFormSubmit(onSuccessSendDataOverlay, onFailSendDataOverlay);
