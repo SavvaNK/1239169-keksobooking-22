@@ -22,7 +22,9 @@ const setMinPrice = () => {
   priceInput.placeholder = minPriceValue;
 };
 
-typeInput.addEventListener('change', setMinPrice);
+const onTypeInputChange = setMinPrice;
+
+typeInput.addEventListener('change', onTypeInputChange);
 
 const timeInInput = adForm.querySelector('#timein');
 const timeOutInput = adForm.querySelector('#timeout');
