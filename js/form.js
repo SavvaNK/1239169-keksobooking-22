@@ -161,13 +161,13 @@ const setAdFormSubmit = (onSuccess, onFail) => {
 };
 
 // form overlays
-const onSuccessSendDataOverlay = () => {
-  const template = document
-    .querySelector('#success')
-    .content
-    .querySelector('.success');
+const successTemplate = document
+  .querySelector('#success')
+  .content
+  .querySelector('.success');
 
-  const clone = template.cloneNode(true);
+const onSuccessSendDataOverlay = () => {
+  const clone = successTemplate.cloneNode(true);
 
   const parentElement = document.querySelector('main');
 
