@@ -35,9 +35,9 @@ const filterFeatures = (houseFeatures) => (
 );
 
 const reduceCheckedCheckboxesValue = (checkboxes) => {
-  const result = [];
-  checkboxes.forEach((el) => el.checked && result.push(el.value));
-  return result;
+  const values = [];
+  checkboxes.forEach((el) => el.checked && values.push(el.value));
+  return values;
 };
 
 const mapFilters = document.querySelector('.map__filters');
