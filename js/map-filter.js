@@ -47,6 +47,10 @@ const roomsFilterInput = mapFilters.querySelector('#housing-rooms');
 const guestsFilterInput = mapFilters.querySelector('#housing-guests');
 const featuresFilterCheckboxes = mapFilters.querySelectorAll('.map__checkbox');
 
+const resetMapFilters = () => {
+  mapFilters.reset();
+};
+
 const processingAds = (ads) => (
   renderAds(ads
     .filter(filterType(typeFilterInput.value))
@@ -59,8 +63,10 @@ const processingAds = (ads) => (
 
 const getAds = () => getData(processingAds, onFailGetDataOverlay);
 
-const onFilterElementChange = debounce(getAds);
+const debouncedGetAds = debounce(getAds);
+
+const onFilterElementChange = debouncedGetAds;
 
 mapFilters.addEventListener('change', onFilterElementChange);
 
-export { getAds };
+export { debouncedGetAds, resetMapFilters };

@@ -1,7 +1,7 @@
 /* global L:readonly */
 
 import { createPopup } from './popup.js';
-import { getAds } from './map-filter.js';
+import { debouncedGetAds } from './map-filter.js';
 
 const disableElement = (el) => el.disabled = true;
 const enableElement = (el) => el.disabled = false;
@@ -36,7 +36,7 @@ const map = L.map('map-canvas')
   .on('load', () => {
     enableForm('.ad-form', 'fieldset');
     enableForm('.map__filters', 'fieldset', 'select');
-    getAds();
+    debouncedGetAds();
   })
   .setView(tokioCenter, MAP_ZOOM);
 
@@ -63,12 +63,19 @@ const mainMarker = L.marker(
 
 const address = document.querySelector('#address');
 address.readOnly = true;
-address.value = `${tokioCenter.lat}, ${tokioCenter.lng}`;
+const setDefaultAddress = () => {
+  address.value = `${tokioCenter.lat}, ${tokioCenter.lng}`;
+};
+setDefaultAddress();
 
 mainMarker.on('drag', (evt) => {
   const { lat, lng } = evt.target.getLatLng();
   address.value = `${lat.toFixed(PRECISION_AFTER_POINT)}, ${lng.toFixed(PRECISION_AFTER_POINT)}`;
 });
+
+const resetMainMarker = () => {
+  mainMarker.setLatLng(tokioCenter);
+};
 
 const adsMarkersLayer = L.layerGroup().addTo(map);
 
@@ -100,4 +107,4 @@ const renderAds = (ads) => {
   });
 };
 
-export { renderAds };
+export { renderAds, resetMainMarker, setDefaultAddress };

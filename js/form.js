@@ -1,4 +1,7 @@
 import { sendData } from './api.js';
+import { resetMainMarker, setDefaultAddress } from './map.js';
+import { resetMapFilters, debouncedGetAds } from './map-filter.js';
+import { debounce } from './utils.js';
 
 const adForm = document.querySelector('.ad-form');
 
@@ -124,7 +127,18 @@ const resetAdForm = () => {
   adForm.reset();
 };
 
-resetButton.addEventListener('click', resetAdForm);
+const resetForm = () => {
+  resetAdForm();
+  resetMapFilters();
+  resetMainMarker();
+  setDefaultAddress();
+  setMinPrice();
+  debouncedGetAds();
+};
+
+const onResetButtonClick = debounce(resetForm, 0);
+
+resetButton.addEventListener('click', onResetButtonClick);
 
 const setAdFormSubmit = (onSuccess, onFail) => {
   const onAdFormSubmit = (evt) => {
@@ -164,7 +178,7 @@ const onSuccessSendDataOverlay = () => {
   parentElement.addEventListener('click', removeClone, {once: true});
   parentElement.addEventListener('keydown', onParentElementKeydownEscape, {once: true});
 
-  resetAdForm();
+  resetForm();
 };
 
 const onFailGetDataOverlay = (err) => {
