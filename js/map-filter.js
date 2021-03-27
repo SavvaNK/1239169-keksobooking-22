@@ -1,7 +1,7 @@
 import { renderAds } from './map.js';
 import { onFailGetDataOverlay } from './form.js';
 import { getData } from './api.js';
-import { debounce } from './utils/index.js';
+import { debounce } from './utils.js';
 
 const MAX_ADS_NUMBER_TO_RENDER = 10;
 
