@@ -31,7 +31,7 @@ const filterPrice = (housePrice) => (
 );
 
 const filterFeatures = (houseFeatures) => (
-  ({ offer: { features } }) => houseFeatures.length === 0 ? true : features.includes(...houseFeatures)
+  ({ offer: { features } }) => houseFeatures.length === 0 ? true : houseFeatures.every(el => features.includes(el))
 );
 
 const reduceCheckedCheckboxesValue = (checkboxes) => {
