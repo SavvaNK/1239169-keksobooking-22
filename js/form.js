@@ -75,8 +75,11 @@ const syncCapacityWithRoomNumber = () => {
   }
 };
 
-roomNumberSelect.addEventListener('change', syncCapacityWithRoomNumber);
-capacitySelect.addEventListener('focus', syncCapacityWithRoomNumber);
+const onRoomNumberSelectChange = syncCapacityWithRoomNumber;
+const onCapacitySelectfocus = syncCapacityWithRoomNumber;
+
+roomNumberSelect.addEventListener('change', onRoomNumberSelectChange);
+capacitySelect.addEventListener('focus', onCapacitySelectfocus);
 
 const titleInput = adForm.querySelector('#title');
 
