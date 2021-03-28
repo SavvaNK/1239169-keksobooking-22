@@ -31,16 +31,13 @@ typeInput.addEventListener('change', onTypeInputChange);
 const timeInInput = adForm.querySelector('#timein');
 const timeOutInput = adForm.querySelector('#timeout');
 
-const syncTimeIn = () => {
+const onTimeOutInputChange = () => {
   timeInInput.value = timeOutInput.value;
 };
 
-const syncTimeOut = () => {
+const onTimeInInputChange = () => {
   timeOutInput.value = timeInInput.value;
 };
-
-const onTimeInInputChange = syncTimeOut;
-const onTimeOutInputChange = syncTimeIn;
 
 timeInInput.addEventListener('change', onTimeInInputChange);
 timeOutInput.addEventListener('change', onTimeOutInputChange);
