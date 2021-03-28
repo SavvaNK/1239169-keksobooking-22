@@ -3,6 +3,8 @@ import { resetMainMarker, setDefaultAddress } from './map.js';
 import { resetMapFilters, debouncedGetAds } from './map-filter.js';
 import { debounce } from './utils.js';
 
+const ZERO_DELAY = 0;
+
 const adForm = document.querySelector('.ad-form');
 
 const minPriceForType = {
@@ -144,7 +146,7 @@ const resetForm = () => {
   debouncedGetAds();
 };
 
-const onResetButtonClick = debounce(resetForm, 0);
+const onResetButtonClick = debounce(resetForm, ZERO_DELAY);
 
 resetButton.addEventListener('click', onResetButtonClick);
 
