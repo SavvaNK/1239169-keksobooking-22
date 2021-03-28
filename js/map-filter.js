@@ -34,7 +34,7 @@ const filterFeatures = (houseFeatures) => (
   ({ offer: { features } }) => houseFeatures.length === 0 ? true : houseFeatures.every(el => features.includes(el))
 );
 
-const reduceCheckedCheckboxesValue = (checkboxes) => {
+const reduceCheckedCheckboxesValues = (checkboxes) => {
   const values = [];
   checkboxes.forEach((el) => el.checked && values.push(el.value));
   return values;
@@ -57,7 +57,7 @@ const processingAds = (ads) => (
     .filter(filterRooms(roomsFilterInput.value))
     .filter(filterGuests(guestsFilterInput.value))
     .filter(filterPrice(priceFilterInput.value))
-    .filter(filterFeatures(reduceCheckedCheckboxesValue(featuresFilterCheckboxes)))
+    .filter(filterFeatures(reduceCheckedCheckboxesValues(featuresFilterCheckboxes)))
     .slice(0, MAX_ADS_NUMBER_TO_RENDER))
 );
 
