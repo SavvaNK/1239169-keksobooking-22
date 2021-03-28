@@ -160,6 +160,8 @@ const setAdFormSubmit = (onSuccess, onFail) => {
 };
 
 // form overlays
+const parentElement = document.querySelector('main');
+
 const successTemplate = document
   .querySelector('#success')
   .content
@@ -167,8 +169,6 @@ const successTemplate = document
 
 const onSuccessSendDataOverlay = () => {
   const clone = successTemplate.cloneNode(true);
-
-  const parentElement = document.querySelector('main');
 
   const removeClone = () => {
     clone.remove();
@@ -203,8 +203,6 @@ const onFailGetDataOverlay = (err) => {
     .querySelector('.get-data-error__message--details')
     .textContent = err;
 
-  const parentElement = document.querySelector('main');
-
   const removeClone = () => {
     clone.remove();
   };
@@ -232,8 +230,6 @@ const onFailSendDataOverlay = () => {
   const clone = errorTemplate.cloneNode(true);
 
   const button = clone.querySelector('.error__button');
-
-  const parentElement = document.querySelector('main');
 
   parentElement.appendChild(clone);
 
