@@ -20,7 +20,6 @@ const sendData = (onSuccess, onFail, data) => {
     serverSendUrl,
     {
       method: 'POST',
-      // body,
       body: data,
     },
   )
