@@ -1,5 +1,4 @@
 /* global L:readonly */
-
 import { createPopup } from './popup.js';
 import { getAdsDebounced } from './map-filter.js';
 
