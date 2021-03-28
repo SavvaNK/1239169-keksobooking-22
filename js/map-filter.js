@@ -1,7 +1,7 @@
 import { renderAds } from './map.js';
 import { onFailGetDataOverlay } from './form.js';
 import { getData } from './api.js';
-import { debounce } from './utils/index.js';
+import { debounce } from './utils.js';
 
 const MAX_ADS_NUMBER_TO_RENDER = 10;
 
@@ -31,13 +31,13 @@ const filterPrice = (housePrice) => (
 );
 
 const filterFeatures = (houseFeatures) => (
-  ({ offer: { features } }) => houseFeatures.length === 0 ? true : features.includes(...houseFeatures)
+  ({ offer: { features } }) => houseFeatures.length === 0 ? true : houseFeatures.every(el => features.includes(el))
 );
 
-const reduceCheckedCheckboxesValue = (checkboxes) => {
-  const result = [];
-  checkboxes.forEach((el) => el.checked && result.push(el.value));
-  return result;
+const reduceCheckedCheckboxesValues = (checkboxes) => {
+  const values = [];
+  checkboxes.forEach((el) => el.checked && values.push(el.value));
+  return values;
 };
 
 const mapFilters = document.querySelector('.map__filters');
@@ -47,20 +47,26 @@ const roomsFilterInput = mapFilters.querySelector('#housing-rooms');
 const guestsFilterInput = mapFilters.querySelector('#housing-guests');
 const featuresFilterCheckboxes = mapFilters.querySelectorAll('.map__checkbox');
 
+const resetMapFilters = () => {
+  mapFilters.reset();
+};
+
 const processingAds = (ads) => (
   renderAds(ads
     .filter(filterType(typeFilterInput.value))
     .filter(filterRooms(roomsFilterInput.value))
     .filter(filterGuests(guestsFilterInput.value))
     .filter(filterPrice(priceFilterInput.value))
-    .filter(filterFeatures(reduceCheckedCheckboxesValue(featuresFilterCheckboxes)))
+    .filter(filterFeatures(reduceCheckedCheckboxesValues(featuresFilterCheckboxes)))
     .slice(0, MAX_ADS_NUMBER_TO_RENDER))
 );
 
 const getAds = () => getData(processingAds, onFailGetDataOverlay);
 
-const onFilterElementChange = debounce(getAds);
+const getAdsDebounced = debounce(getAds);
+
+const onFilterElementChange = getAdsDebounced;
 
 mapFilters.addEventListener('change', onFilterElementChange);
 
-getAds();
+export { getAdsDebounced, resetMapFilters };

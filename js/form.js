@@ -1,4 +1,9 @@
 import { sendData } from './api.js';
+import { resetMainMarker, setDefaultAddress } from './map.js';
+import { resetMapFilters, getAdsDebounced } from './map-filter.js';
+import { debounce } from './utils.js';
+
+const ZERO_DELAY = 0;
 
 const adForm = document.querySelector('.ad-form');
 
@@ -19,28 +24,30 @@ const setMinPrice = () => {
   priceInput.placeholder = minPriceValue;
 };
 
-typeInput.addEventListener('change', setMinPrice);
+const onTypeInputChange = setMinPrice;
+
+typeInput.addEventListener('change', onTypeInputChange);
 
 const timeInInput = adForm.querySelector('#timein');
 const timeOutInput = adForm.querySelector('#timeout');
 
-const syncTimeIn = () => {
+const onTimeOutInputChange = () => {
   timeInInput.value = timeOutInput.value;
 };
 
-const syncTimeOut = () => {
+const onTimeInInputChange = () => {
   timeOutInput.value = timeInInput.value;
 };
 
-timeInInput.addEventListener('change', syncTimeOut);
-timeOutInput.addEventListener('change', syncTimeIn);
+timeInInput.addEventListener('change', onTimeInInputChange);
+timeOutInput.addEventListener('change', onTimeOutInputChange);
 
 const getArrayOfRange = (start, end, step = 1) => {
-  const result = [];
+  const results = [];
   for (let current = start; step < 0 ? current >= end : current <= end; current += step) {
-    result.push(current.toString());
+    results.push(current.toString());
   }
-  return result;
+  return results;
 };
 
 const capacityInvalidMessage = 'Количество гостей не может быть больше количества комнат!';
@@ -67,8 +74,11 @@ const syncCapacityWithRoomNumber = () => {
   }
 };
 
-roomNumberSelect.addEventListener('change', syncCapacityWithRoomNumber);
-capacitySelect.addEventListener('focus', syncCapacityWithRoomNumber);
+const onRoomNumberSelectChange = syncCapacityWithRoomNumber;
+const onCapacitySelectFocus = syncCapacityWithRoomNumber;
+
+roomNumberSelect.addEventListener('change', onRoomNumberSelectChange);
+capacitySelect.addEventListener('focus', onCapacitySelectFocus);
 
 const titleInput = adForm.querySelector('#title');
 
@@ -124,7 +134,18 @@ const resetAdForm = () => {
   adForm.reset();
 };
 
-resetButton.addEventListener('click', resetAdForm);
+const resetForm = () => {
+  resetAdForm();
+  resetMapFilters();
+  resetMainMarker();
+  setDefaultAddress();
+  setMinPrice();
+  getAdsDebounced();
+};
+
+const onResetButtonClick = debounce(resetForm, ZERO_DELAY);
+
+resetButton.addEventListener('click', onResetButtonClick);
 
 const setAdFormSubmit = (onSuccess, onFail) => {
   const onAdFormSubmit = (evt) => {
@@ -139,15 +160,15 @@ const setAdFormSubmit = (onSuccess, onFail) => {
 };
 
 // form overlays
+const parentElement = document.querySelector('main');
+
+const successTemplate = document
+  .querySelector('#success')
+  .content
+  .querySelector('.success');
+
 const onSuccessSendDataOverlay = () => {
-  const template = document
-    .querySelector('#success')
-    .content
-    .querySelector('.success');
-
-  const clone = template.cloneNode(true);
-
-  const parentElement = document.querySelector('body');
+  const clone = successTemplate.cloneNode(true);
 
   const removeClone = () => {
     clone.remove();
@@ -161,26 +182,27 @@ const onSuccessSendDataOverlay = () => {
   };
 
   parentElement.appendChild(clone);
-  parentElement.addEventListener('click', removeClone, {once: true});
+
+  const onParentElementClick = removeClone;
+
+  parentElement.addEventListener('click', onParentElementClick, {once: true});
   parentElement.addEventListener('keydown', onParentElementKeydownEscape, {once: true});
 
-  resetAdForm();
+  resetForm();
 };
 
-const onFailGetDataOverlay = (err) => {
-  const template = document
-    .querySelector('#get-data-error')
-    .content
-    .querySelector('.get-data-error');
+const dataErrorTemplate = document
+  .querySelector('#get-data-error')
+  .content
+  .querySelector('.get-data-error');
 
-  const clone = template.cloneNode(true);
+const onFailGetDataOverlay = (err) => {
+  const clone = dataErrorTemplate.cloneNode(true);
 
   clone
     .querySelector('.get-data-error__message--details')
     .textContent = err;
 
-  const parentElement = document.querySelector('body');
-
   const removeClone = () => {
     clone.remove();
   };
@@ -192,22 +214,22 @@ const onFailGetDataOverlay = (err) => {
     }
   };
 
+  const onParentElementClick = removeClone;
+
   parentElement.appendChild(clone);
-  parentElement.addEventListener('click', removeClone, {once: true});
+  parentElement.addEventListener('click', onParentElementClick, {once: true});
   parentElement.addEventListener('keydown', onParentElementKeydownEscape, {once: true});
 };
 
-const onFailSendDataOverlay = () => {
-  const template = document
-    .querySelector('#error')
-    .content
-    .querySelector('.error');
+const errorTemplate = document
+  .querySelector('#error')
+  .content
+  .querySelector('.error');
 
-  const clone = template.cloneNode(true);
+const onFailSendDataOverlay = () => {
+  const clone = errorTemplate.cloneNode(true);
 
   const button = clone.querySelector('.error__button');
-
-  const parentElement = document.querySelector('body');
 
   parentElement.appendChild(clone);
 
@@ -222,10 +244,14 @@ const onFailSendDataOverlay = () => {
     }
   };
 
-  parentElement.addEventListener('click', removeClone, {once: true});
+  const onParentElementClick = removeClone;
+
+  parentElement.addEventListener('click', onParentElementClick, {once: true});
   parentElement.addEventListener('keydown', onParentElementKeydownEscape, {once: true});
 
-  button.addEventListener('click', removeClone);
+  const onButtonClick = removeClone;
+
+  button.addEventListener('click', onButtonClick);
 };
 
 setAdFormSubmit(onSuccessSendDataOverlay, onFailSendDataOverlay);

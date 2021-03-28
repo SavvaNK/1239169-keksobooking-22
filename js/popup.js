@@ -68,7 +68,7 @@ const createPopup = ({ author, offer }) => {
 
   const popupPrice = popup.querySelector('.popup__text--price');
   price
-    ? popupPrice.innerHTML = `${price} <span>₽/ночь<span>`
+    ? popupPrice.textContent = `${price} ₽/ночь`
     : popupPrice.remove();
 
   const popupType = popup.querySelector('.popup__type');
