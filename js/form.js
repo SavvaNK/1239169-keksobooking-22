@@ -1,6 +1,6 @@
 import { sendData } from './api.js';
 import { resetMainMarker, setDefaultAddress } from './map.js';
-import { resetMapFilters, debouncedGetAds } from './map-filter.js';
+import { resetMapFilters, getAdsDebounced } from './map-filter.js';
 import { debounce } from './utils.js';
 
 const ZERO_DELAY = 0;
@@ -143,7 +143,7 @@ const resetForm = () => {
   resetMainMarker();
   setDefaultAddress();
   setMinPrice();
-  debouncedGetAds();
+  getAdsDebounced();
 };
 
 const onResetButtonClick = debounce(resetForm, ZERO_DELAY);

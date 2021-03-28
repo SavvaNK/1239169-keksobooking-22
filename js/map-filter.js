@@ -63,10 +63,10 @@ const processingAds = (ads) => (
 
 const getAds = () => getData(processingAds, onFailGetDataOverlay);
 
-const debouncedGetAds = debounce(getAds);
+const getAdsDebounced = debounce(getAds);
 
-const onFilterElementChange = debouncedGetAds;
+const onFilterElementChange = getAdsDebounced;
 
 mapFilters.addEventListener('change', onFilterElementChange);
 
-export { debouncedGetAds, resetMapFilters };
+export { getAdsDebounced, resetMapFilters };
