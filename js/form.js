@@ -46,11 +46,11 @@ timeInInput.addEventListener('change', onTimeInInputChange);
 timeOutInput.addEventListener('change', onTimeOutInputChange);
 
 const getArrayOfRange = (start, end, step = 1) => {
-  const result = [];
+  const results = [];
   for (let current = start; step < 0 ? current >= end : current <= end; current += step) {
-    result.push(current.toString());
+    results.push(current.toString());
   }
-  return result;
+  return results;
 };
 
 const capacityInvalidMessage = 'Количество гостей не может быть больше количества комнат!';
